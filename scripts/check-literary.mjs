@@ -17,11 +17,14 @@ assert.equal(new URL(content.quoteSource).hostname,'www.chinawriter.com.cn');
 assert.equal(content.scenes.length,3);
 assert.equal(new Set(content.scenes.map(scene=>scene.id)).size,3);
 for(const scene of content.scenes){
-  assert.match(scene.image,/^\/literary-[a-z]+\.png$/);
+  assert.match(scene.image,/^\/literary-[a-z]+\.webp$/);
   assert.ok(scene.alt.includes('原创文学氛围图'));
   assert.ok(Number.isInteger(scene.routeDay)&&scene.routeDay>=1&&scene.routeDay<=7);
   assert.equal(scene.lines.length,2);
-  const bytes=readFileSync(new URL(`public${scene.image}`,root));
+  const optimized=readFileSync(new URL(`public${scene.image}`,root));
+  assert.equal(optimized.toString('ascii',8,12),'WEBP');
+  assert.ok(optimized.length<300000,'Literary web image budget');
+  const bytes=readFileSync(new URL(`public${scene.image.replace('.webp','.png')}`,root));
   assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
   assert.equal(bytes.readUInt32BE(16),1536);
   assert.equal(bytes.readUInt32BE(20),1024);
@@ -84,7 +87,11 @@ for(const motionEnabled of [true,false]){
   for(const tag of html.matchAll(/<a\b[^>]+>/g)){
     if(tag[0].includes('href="https:'))assert.ok(tag[0].includes('target="_blank"')&&tag[0].includes('noopener noreferrer'));
   }
-  assert.equal([...html.matchAll(/<img\b/g)].length,4,'Two AI artworks, one sourced film still, one historical city image');
+  assert.equal([...html.matchAll(/<img\b/g)].length,4,'Two AI artworks, an official night landscape still, and one historical city image');
+  assert.ok(html.includes(works.film.image)&&html.includes(works.film.imageSource));
+  assert.ok(!html.includes('csm_201813696_23860'),'No old close-up film portrait');
+  assert.match(works.film.imageAlt,/夜色山峦.*不是满洲里实景/);
+  assert(readFileSync(new URL(`public${works.film.image}`,root)).length<50000);
   assert.ok(!html.includes('www.ad.tsinghua.edu.cn/_mediafile'),'Photography images must not be copied into the page');
 }
 const css=readFileSync(new URL('app/literary.css',root),'utf8');

@@ -13,6 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
+      <head><link rel="preload" href="/fonts/autumn-brush.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/></head>
       <body>
         {children}
       </body>

@@ -105,6 +105,49 @@ Background: genuinely transparent RGBA alpha, with no scene or background whatso
 Constraints: exactly one standalone branch image. NO leaves, since separate existing gold leaf buttons will be placed in code. No shadows cast on a surface. No letters, words, UI, circles, ticks, numbers, symbols, roots, full tree, background, checkerboard, frame, watermark, logos, or added objects.
 ```
 
+## 2026-09-10 — editorial typography and quiet forest background
+
+- Display type: [Ma Shan Zheng, official Google Fonts repository](https://github.com/google/fonts/tree/main/ofl/mashanzheng), SIL OFL 1.1. The self-hosted subset is `public/fonts/autumn-brush.woff2` (36,976 bytes); license in `public/fonts/OFL-MaShanZheng.txt`; actual headline characters in `app/title-glyphs.txt`. System sans remains for body/control copy. This is not the original lettering from 《漫长的季节》. Its official [2023-04-14 poster](https://www.sina.cn/news/detail/4890388751454219.html) informed the pen rhythm and title hierarchy, not a copied wordmark.
+- River/forest/embers and leaf/branch PNG originals remain unchanged. The page now consumes WebP versions. The two displayed literary artworks plus the leaf and branch total 467,496 bytes instead of 6,258,374 bytes (92.5% smaller); this is an asset-byte comparison, not a measured page-speed/LCP improvement.
+- New original forest plate: `public/forest-drive.webp` (1440×960, 325,574 bytes); mobile `public/forest-drive-960.webp` (960×640, 165,600 bytes). Built-in image_gen, one generation; fictional northern autumn, not an Arxan documentary photo. Prompt below. Both exports only resize/encode the generated plate.
+- A separate generic white SUV was generated for an explored animation. Following user feedback, **the final page is static**: no car layer, player, timeline, animation loop or motion observer. `public/forest-car.webp` is retained but is not requested by the page. Map route playback is separate and unchanged.
+- The close-up 《大象席地而坐》 still is no longer embedded; [Arsenal's original film page](https://www.arsenal-berlin.de/en/berlinale-forum/archive/program-archive/2018/forum-program/main-program/an-elephant-sitting-still-1/) remains an explicit source link. No third-party video was downloaded or rehosted.
+
+### Final prompt — forest-road background (built-in image_gen)
+
+```text
+Use case: photorealistic-natural
+Asset type: original raster background plate for a lightweight autumn road-trip animation; fictional northern forest atmosphere, not documentary or exact geographic reconstruction.
+Primary request: a genuinely photorealistic STRICTLY VERTICAL NADIR aerial photograph, camera pointing exactly straight down at 90 degrees, of a golden autumn birch-and-larch forest with one narrow two-lane gray asphalt road.
+Scene/backdrop: a dense, varied canopy of golden white birch and yellow larch trees, small touches of subdued evergreen green, believable natural leaf and branch texture, rich but restrained ochre and honey autumn colors.
+Subject: one continuous narrow gray two-way paved road travels from the BOTTOM edge at approximately x=50% to the TOP edge at approximately x=50%. The road has a gentle, shallow S curve: around x=50% at bottom, x=45% near lower third, x=56% near upper third, and x=50% at top. Both edges are crisp enough that an animated vehicle can trace the road smoothly. Road width is approximately 5% to 7% of image width. Subtle center dashed white line and understated road edges, realistic rural asphalt.
+Composition/framing: wide landscape 3:2 aspect ratio, target 1536 x 1024 pixels. Strict orthographic-looking overhead drone view; all road width stays consistent without vanishing point or horizon. Forest fills all remaining area edge to edge. Natural irregular tree crowns may approach the shoulder, but keep the entire road's travel corridor visible and unobstructed. Single image, not a collage.
+Lighting/mood: clear soft autumn daylight from upper left, realistic subtle shadows from tree crowns, quiet photographic atmosphere.
+Color palette: gold, ochre, honey, bark brown, restrained forest green and neutral gray; no neon, no technology blue, no purple.
+Constraints: NO vehicles of any kind, no cars, no people, no buildings, no animals, no junctions, no forks, no guardrail billboards, no written words, no logos, no watermark, no UI, no borders. No oblique angle, no horizon, no mountains in perspective, no tilt-shift miniature look. This is an empty road background, with the vehicle to be added later as a separate animated layer.
+```
+
+### Final prompt — unused SUV layer (built-in image_gen)
+
+```text
+Use case: product-mockup
+Asset type: one photorealistic transparent vehicle sprite for compositing over an overhead aerial road photograph.
+Primary request: exactly ONE white large modern SUV viewed from STRICTLY VERTICAL DIRECTLY OVERHEAD, camera pointing straight down at 90 degrees. The FRONT of the car points straight UP toward the top edge of the image.
+Subject: a long, substantial, clean white large SUV with realistic proportions, black panoramic glass roof, dark windshield near the front, dark rear window at the rear, understated silver trim and two side mirrors. Generic design with NO branding; it need not match any particular make or model.
+Composition/framing: a tall narrow portrait canvas, approximately 1:2 width-to-height ratio, target 768 x 1536 pixels. One centered complete vehicle aligned to the exact vertical axis. Keep the crop compact: the car fills roughly 85% of the canvas height and 80% of its width including mirrors, while retaining all bumpers and mirrors fully in frame. No other object.
+Style/medium: photorealistic automotive material rendering, crisp white painted metal, believable black glass reflections, clean anti-aliased silhouette; dimensional enough to look real but strictly top-down. No oblique perspective, no visible front grille elevation or side panels.
+Lighting: subtle soft outdoor daylight from upper left, neutral restrained reflections matching an autumn aerial scene.
+Background: GENUINELY TRANSPARENT RGBA alpha. No background at all. Preserve clean alpha around the body and fine mirrors; all space surrounding the SUV must be transparent. No floor plane, no road, no landscape, no studio backdrop, no solid-color background, no painted checkerboard.
+Constraints: exactly one standalone car; front points UP, rear points DOWN; no people, no text, no logos, no readable number plates, no watermark, no UI, no border, no multiple angles, no multiple vehicles, no decorative elements. Do not bake a cast shadow into an opaque surrounding rectangle.
+```
+
+## 2026-09-10 — lighter delivery and a landscape film still
+
+- `public/elephant-night-v1.webp`: 1440×961, 39,056 bytes. [Rediance official film page](https://www.rediancefilms.com/film.php-30.html?id=18), [source still](https://www.rediancefilms.com/asset/image/a/film_18_5.jpg), originally 7360×4912 / 701,204 bytes. Visually inspected: night mountain silhouette, distant passengers in headlights and coach on the right. Used as one low-resolution attributed illustration in film discussion; not openly licensed and no unrestricted reuse permission asserted. Also listed for press download by [Zeta Filmes](https://www.zetafilmes.com.br/filme.php?id=74). This is a film frame, **not Manzhouli scenery**. Encoding: `cwebp -q 80 -resize 1440 0`. No video downloaded or embedded.
+- `public/day04-grassland-v1.webp`: 840 px wide, 42,922 bytes, resized and WebP-re-encoded from mayanming's Wikimedia Commons photograph (source URL remains in `app/day-scenes.json`). Original 2,426,541 bytes. Derived image remains [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), author credit retained. The 2012 August **summer** date remains visible; no recoloring or 2026 autumn claim.
+- `app/regional-water.generated.json`: 5,992 bytes, 10 river/lake features derived from Natural Earth 1:50m, [public domain](https://www.naturalearthdata.com/about/terms-of-use/). Official source: [Natural Earth vector repository](https://github.com/nvkelso/natural-earth-vector/tree/master/geojson), `ne_50m_rivers_lake_centerlines.geojson` (Git blob `6f9d88ea3498448c7f29f458ce42a771a36bd6be`) and `ne_50m_lakes.geojson` (`5ddced58279ea13ae5023929f135bb7ecfd12d95`). Generator `scripts/prepare-regional-water.mjs` keeps regional physical features, drops outside river vertices and rounds to four decimals. Deliberately no political boundaries, invented roads or tile imagery. Only approximate geographic context; route coordinates themselves stay full precision.
+- Detailed OpenStreetMap tiles are optional, requested directly by the browser only after selection, with visible attribution and ordinary HTTP caching. Follow the [OSM tile usage policy](https://operations.osmfoundation.org/policies/tiles/); no bulk downloading, prefetch or map proxy.
+
 ## Final leaf generation prompt
 
 Use case: photorealistic-natural

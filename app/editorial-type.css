@@ -1,0 +1,48 @@
+@font-face {
+  font-family:'Autumn Brush';
+  src:url('/fonts/autumn-brush.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+:root { --display-font:'Autumn Brush','Kaiti SC','STKaiti',serif; }
+.brand { font-family:var(--display-font); font-weight:400; font-size:29px; letter-spacing:.06em; font-synthesis:none; }
+.page-heading h1 { font:400 clamp(39px,4vw,58px)/1.2 var(--display-font); letter-spacing:.015em; font-synthesis:none; }
+.day-content h2 { font:400 32px/1.3 var(--display-font); letter-spacing:0; font-synthesis:none; }
+.culture-heading h2,
+.culture-photo-copy h3,
+.culture-grassland-title h3,
+.culture-cinema-body h3,
+.culture-homecoming-copy h3,
+.culture-grassland-word,
+.culture-cinema-place { font-family:var(--display-font); font-weight:400; font-synthesis:none; letter-spacing:.015em; }
+.culture-heading h2 { font-size:clamp(43px,4.9vw,72px); }
+.culture-river-copy h3 { font-family:var(--display-font); font-weight:400; font-synthesis:none; letter-spacing:0; margin:27px 0 0; }
+.culture-river-copy h3>span { display:block; font-size:clamp(28px,3vw,43px); line-height:1.3; letter-spacing:.055em; }
+.culture-river-copy h3 em { display:block; width:fit-content; font-size:clamp(82px,9vw,126px); line-height:1.05; margin:6px 0 0 .28em; transform:rotate(-4deg); color:#a16336; }
+.culture-photo-copy h3 { font-size:clamp(39px,4.2vw,63px); line-height:1.25; }
+.culture-grassland-title h3 { font-size:clamp(35px,3.6vw,53px); line-height:1.4; }
+.culture-cinema-body h3 { font-size:clamp(60px,6.6vw,98px); line-height:1.15; letter-spacing:.015em; }
+.culture-homecoming-copy h3 { font-size:clamp(42px,4.7vw,66px); line-height:1.3; }
+.culture-cinema-place { letter-spacing:.16em; }
+/* Small controls and longer reading passages retain the system sans/serif.
+   The brush face is subsetted to the authored display text, never full-body CJK. */
+.culture-heading nav a { font-family:var(--body-font); font-size:13px; letter-spacing:.12em; }
+.culture-quotation blockquote { font-size:clamp(23px,2.15vw,30px); line-height:1.85; letter-spacing:.045em; }
+@media(max-width:760px) {
+  .brand { font-size:25px; }
+  .page-heading h1 { font-size:38px; }
+  .day-content h2 { font-size:32px; }
+  .culture-heading h2 { font-size:43px; }
+  .culture-river-copy h3>span { font-size:34px; }
+  .culture-river-copy h3 em { font-size:94px; }
+  .culture-photo-copy h3 { font-size:46px; }
+  .culture-grassland-title h3 { font-size:37px; }
+  .culture-cinema-body h3 { font-size:72px; }
+  .culture-homecoming-copy h3 { font-size:43px; }
+}
+@media(max-width:390px) {
+  .page-heading h1 { font-size:34px; }
+  .culture-heading h2 { font-size:38px; }
+  .culture-grassland-title h3 { font-size:32px; }
+}

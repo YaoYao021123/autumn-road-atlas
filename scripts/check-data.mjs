@@ -2,12 +2,26 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import ts from 'typescript';
+import { encodeRoute, decodeRoute } from '../app/route-codec.ts';
 
 const data=JSON.parse(await readFile(new URL('../app/routes.generated.json',import.meta.url),'utf8'));
+const compactText=await readFile(new URL('../app/routes.compact.json',import.meta.url),'utf8');
+const compact=JSON.parse(compactText);
+assert(Buffer.byteLength(compactText)<140000,'Compact route payload budget');
+for(const [id,segment] of Object.entries(data.segments)){
+  assert.deepEqual(decodeRoute(compact.segments[id].path),segment.points,`${id}: preserve every coordinate`);
+  const {path,...metadata}=compact.segments[id];
+  const {points,...originalMetadata}=segment;
+  assert.deepEqual(metadata,originalMetadata,`${id}: preserve navigation and all route metadata`);
+  assert.equal(encodeRoute(points),path,'Reproducible encoding');
+}
+assert.deepEqual(decodeRoute(''),[]);
+assert.throws(()=>decodeRoute('_'));
+assert.throws(()=>decodeRoute('!!'));
 const source=await readFile(new URL('../app/trip.ts',import.meta.url),'utf8');
 const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
 const result={exports:{}};
-vm.runInNewContext(code,{exports:result.exports,module:result,URLSearchParams,require:(name)=>{assert.equal(name,'./routes.generated.json');return data;}});
+vm.runInNewContext(code,{exports:result.exports,module:result,URLSearchParams,require:(name)=>{if(name==='./route-codec')return {decodeRoute};assert.equal(name,'./routes.compact.json');return compact;}});
 const api=result.exports;
 assert.equal(Object.keys(api.segments).length,17);
 assert.equal(api.segments.park_city,undefined,'Misresolved hot-spring snapshot must stay excluded');

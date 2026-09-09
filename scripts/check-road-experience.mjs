@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import ts from 'typescript';
+import { decodeRoute } from '../app/route-codec.ts';
 
 const read = async (path) => readFile(new URL(path, import.meta.url), 'utf8');
 const data = JSON.parse(await read('../app/routes.generated.json'));
@@ -26,7 +27,7 @@ function load(source, dependencies) {
   return result.exports;
 }
 
-const trip = load(tripSource, { './routes.generated.json': data });
+const trip = load(tripSource, { './routes.compact.json':JSON.parse(await read('../app/routes.compact.json')), './route-codec':{decodeRoute} });
 const api = load(sceneSource, { './road-scenes.json': definitions, './trip': trip });
 const radians = Math.PI / 180;
 function distanceKm(a, b) {

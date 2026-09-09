@@ -1,10 +1,14 @@
-import raw from './routes.generated.json';
+import raw from './routes.compact.json';
+import { decodeRoute } from './route-codec';
 
 export type Position=[number,number];
 export type Stop={name:string;bd09:[number,number];position:Position};
 export type Segment={id:string;origin:Stop;destination:Stop;km:number;minutes:number;points:Position[]};
 // The generator validates every coordinate pair before emitting this JSON.
-export const segments=raw.segments as unknown as Record<string,Segment>;
+export const segments=Object.fromEntries(Object.entries(raw.segments).map(([id,segment])=>{
+  const {path,...metadata}=segment;
+  return [id,{...metadata,points:decodeRoute(path)}];
+})) as Record<string,Segment>;
 export type Endpoint='airport'|'west';
 export type Day={id:number;date:string;weekday:string;short:string;title:string;subtitle:string;road:string;budget:string;note:string;stops:string[];legs:string[]};
 export function getDays(endpoint:Endpoint,overnight:boolean):Day[] {

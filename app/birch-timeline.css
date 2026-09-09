@@ -4,7 +4,7 @@
 .chapter-leaf svg { stroke-width:1.3; }
 .birch-days { margin-top:0; margin-bottom:15px; }
 .birch-days-list { position:relative; padding:8px 0!important; isolation:isolate; }
-.birch-spine { pointer-events:none; position:absolute; z-index:-1; left:4%; right:4%; top:68px; height:44px; background:url('/timeline-birch.png') center/100% 100% no-repeat; opacity:.88; }
+.birch-spine { pointer-events:none; position:absolute; z-index:-1; left:4%; right:4%; top:68px; height:44px; background:url('/timeline-birch.webp') center/100% 100% no-repeat; opacity:.88; }
 .leaf-day { position:relative; min-height:132px; height:auto!important; padding:8px 10px 10px!important; gap:0!important; align-items:center!important; border:0!important; text-align:center; border-radius:0; background:transparent!important; box-shadow:none!important; }
 .leaf-day+.leaf-day { border-left:0; }
 .leaf-day[data-active] { background:transparent!important; color:var(--leaf-ink,#9a4e22)!important; }

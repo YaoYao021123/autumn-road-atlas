@@ -44,7 +44,7 @@ export function LiteraryInterlude({ motionEnabled, onRouteSelect }: Props) {
       </figure>
       <div className="culture-copy culture-river-copy">
         <span className="culture-location">01 / 河流与时间 <i>额尔古纳方向</i></span>
-        <h3 id="river-work-title">额尔古纳河<br/><em>右岸</em></h3>
+        <h3 id="river-work-title"><span>额尔古纳河</span><em>右岸</em></h3>
         <p className="culture-work-meta">{works.book.creator} · {works.book.year} · {works.book.recognition}</p>
         <figure className="culture-quotation"><blockquote cite={content.quoteSource}>{content.quote}</blockquote><figcaption><a href={content.quoteSource} target="_blank" rel="noopener noreferrer">小说短引 · 原文出处<ArrowUpRight size={12}/></a></figcaption></figure>
         <p className="culture-body">{works.book.description}</p>
@@ -69,9 +69,11 @@ export function LiteraryInterlude({ motionEnabled, onRouteSelect }: Props) {
     </article>
 
     <article id="culture-cinema" className="culture-cinema culture-scene" data-culture-scene aria-labelledby="cinema-work-title">
-      <figure className="culture-cinema-art">{!failedImages.includes('film')&&<img src={works.film.image} alt={works.film.imageAlt} width={1074} height={670} loading="lazy" decoding="async" onError={()=>failed('film')}/>}<figcaption><a href={works.film.sources[0].url} target="_blank" rel="noopener noreferrer">{works.film.imageCredit}<ArrowUpRight size={12}/></a></figcaption></figure>
+      <figure className="culture-cinema-art">
+        {!failedImages.includes('film')&&<img src={works.film.image} alt={works.film.imageAlt} width={1440} height={961} loading="lazy" decoding="async" fetchPriority="low" onError={()=>failed('film')}/>}
+        <figcaption><a href={works.film.imageSource} target="_blank" rel="noopener noreferrer">{works.film.imageCredit}<ArrowUpRight size={12}/></a><span>{failedImages.includes('film')?'画面暂未载入 · ':''}影片画面 · 非满洲里实景</span></figcaption>
+      </figure>
       <div className="culture-cinema-body culture-copy"><span className="culture-location">03 / 城市与远方 <i>满洲里</i></span><span className="culture-medium"><Film size={15}/>电影 · {works.film.year}</span><h3 id="cinema-work-title">大象<br/>席地而坐</h3><p className="culture-work-meta">胡波导演 · {works.film.recognition}</p><p className="culture-cinema-line">不是所有远方，<br/>都为了看风景。</p><p className="culture-body">{works.film.description}</p><p className="culture-cinema-boundary">叙事中的目的地，不是满洲里取景纪录。<br/>冷峻而沉重的长片，适合出发前静下来观看。</p><div className="culture-cinema-actions"><a className="culture-text-link" href={works.film.watchUrl} target="_blank" rel="noopener noreferrer"><Play size={16}/>{works.film.watchLabel}<ArrowUpRight size={16}/></a><Button variant="ghost" className="culture-route-link" onClick={()=>onRouteSelect(works.film.routeDay)}>回到 D03 · 满洲里<ArrowUpRight size={16}/></Button></div><WorkSources work={works.film}/></div>
-      <span className="culture-cinema-place" aria-hidden="true">满洲里</span>
     </article>
 
     <article id="culture-homecoming" className="culture-homecoming culture-scene" data-culture-scene aria-labelledby="homecoming-work-title">
