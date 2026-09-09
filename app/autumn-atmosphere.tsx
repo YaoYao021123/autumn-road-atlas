@@ -2,7 +2,7 @@
 /* oxlint-disable next/no-img-element -- decorative local PNG assets are statically shipped and no image-optimization server is present. */
 
 import { useEffect, useRef } from 'react';
-import { foliageForDay } from './regional-foliage';
+import { foliageForDay, foliageForContext } from './regional-foliage';
 
 const LEAF_POOL_SIZE=5;
 
@@ -44,12 +44,13 @@ export function AutumnAtmosphere({enabled,day=1}:{enabled:boolean;day?:number}) 
         if(leaf.dataset.leafToken===token)leaf.dataset.active='false';
       };
     };
-    const emit=(clientX:number,clientY:number,count:number,kind:'tap'|'scroll')=>{
+    const emit=(clientX:number,clientY:number,count:number,kind:'tap'|'scroll',context:Element|null)=>{
       if(document.hidden||!leafPool.length)return;
+      const motif=foliageForContext(context,day);
       const leaves=leafPool.filter(Boolean),limit=Math.min(count,narrow.matches?2:3,leaves.length);
       for(let i=0;i<limit;i++) {
         const leaf=leaves[(serial+i)%leaves.length];
-        if(leaf)wakeLeaf(leaf,clientX,clientY,i,kind);
+        if(leaf){leaf.src=motif.image;leaf.dataset.foliage=motif.kind;wakeLeaf(leaf,clientX,clientY,i,kind);}
       }
     };
     const pointerDown=(e:PointerEvent)=>{start={x:e.clientX,y:e.clientY};};
@@ -58,14 +59,33 @@ export function AutumnAtmosphere({enabled,day=1}:{enabled:boolean;day?:number}) 
       const now=performance.now();if(now-lastClick<220)return;lastClick=now;
       if(!(e.target instanceof Element)||!e.target.closest('.atlas')||e.target.closest('.atmosphere-button,button,a,input,select,textarea,[role="slider"],.leaflet-container'))return;
       const box=e.target.getBoundingClientRect();
-      emit(e.detail?e.clientX:box.left+box.width/2,e.detail?e.clientY:box.top+box.height/2,narrow.matches?2:3,'tap');
+      emit(e.detail?e.clientX:box.left+box.width/2,e.detail?e.clientY:box.top+box.height/2,narrow.matches?2:3,'tap',e.target);
     };
-    const scroll=()=>{
+    const scroll=(e:Event)=>{
+      if(e.target instanceof Element&&(!e.target.closest('.atlas')||e.target.closest('.leaflet-container')))return;
       if(scrollTimer)window.clearTimeout(scrollTimer);
       scrollTimer=window.setTimeout(()=>{
         scrollTimer=undefined;
         const compact=narrow.matches;
-        emit(window.innerWidth*(compact?.7:.72),Math.min(window.innerHeight*(compact?.34:.36),compact?246:290),compact?1:2,'scroll');
+        const atlas=document.querySelector('.atlas');if(!atlas)return;
+        const box=atlas.getBoundingClientRect(),left=Math.max(0,box.left),right=Math.min(window.innerWidth,box.right);
+        if(box.bottom<=0||box.top>=window.innerHeight||right<=left)return;
+        const x=left+(right-left)*(compact?.7:.72),y=Math.min(window.innerHeight*(compact?.34:.36),compact?246:290);
+        // Hit-test only after scrolling settles; never run a per-frame observer.
+        const target=document.elementFromPoint(x,y);
+        let context=target?.closest('[data-foliage]')??null;
+        if(!context){
+          // In the breathing space between chapters, use the nearest visible
+          // chapter, not a day selected several screens earlier.
+          let nearest=Infinity;
+          atlas.querySelectorAll('section[data-foliage],article[data-foliage],aside[data-foliage]').forEach(node=>{
+            const rect=node.getBoundingClientRect();
+            if(rect.bottom<=0||rect.top>=window.innerHeight||rect.width<=0)return;
+            const distance=Math.max(rect.top-y,y-rect.bottom,0);
+            if(distance<nearest){nearest=distance;context=node;}
+          });
+        }
+        emit(x,y,compact?1:2,'scroll',context);
       },narrow.matches?180:150);
     };
     window.addEventListener('pointerdown',pointerDown,{passive:true,capture:true});

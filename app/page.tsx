@@ -14,7 +14,8 @@ import { LiteraryInterlude } from './literary-interlude';
 import './autumn.css';
 import './birch-timeline.css';
 import './editorial-type.css';
-import { getDays, segments, routeStops, navigationUrl, minutesText, type Endpoint } from './trip';
+import { getDays, segments, routeStops, type Endpoint } from './trip';
+import { RouteNavigation } from './route-navigation';
 import { leafVariables, seasonPalette } from './season-palette';
 import { foliageForDay, foliageForPlace } from './regional-foliage';
 import { DayLandscape } from './day-landscape';
@@ -110,7 +111,7 @@ export default function Home() {
       <div className="mobile-day-current" aria-live="polite"><span className="mobile-day-meta"><span className="mobile-day-leaf" aria-hidden="true"><img src={foliageForDay(dayId).image} alt=""/></span><span>DAY {String(day.id).padStart(2,'0')} · {day.date} · {foliageForDay(dayId).label}</span></span><strong>{day.short}</strong></div>
       <Button variant="outline" size="icon" className="mobile-day-arrow" disabled={dayId===days.length} aria-label={`切换到后一天${dayId<days.length?`：${days[dayId].short}`:''}`} onClick={()=>selectDay(dayId+1)}><ChevronRight/></Button>
     </nav>
-    <section id="route-workspace" className="workspace" tabIndex={-1} aria-label="逐日地图与导航">
+    <section id="route-workspace" className="workspace" data-foliage={foliageForDay(dayId).kind} tabIndex={-1} aria-label="逐日地图与导航">
       <aside className="day-panel" aria-label="当天路线详情" style={leafVariables(dayId) as CSSProperties}>
         <DayLandscape key={dayScene.image} scene={dayScene}/>
         <div className="day-content" key={`${dayId}-${endpoint}-${overnight}`}>
@@ -119,9 +120,9 @@ export default function Home() {
           <div className="day-metrics"><div><Route size={15}/><strong>{legs.length?Math.round(km):'—'}<span>km</span></strong><small>{dayId===5?'外部自驾接驳':'规划里程'}</small></div><div><Clock3 size={15}/><strong>{legs.length?<>{Math.floor(minutes/60)}<span>h</span>{String(minutes%60).padStart(2,'0')}<span>min</span></>:'待定'}</strong><small>{legs.length?'当前驾驶基线':'实际门店尚未确定'}</small></div></div>
           <p className="budget"><Clock3 size={14}/>{day.budget}</p>
           <DrivingEffort dayId={dayId} overnight={overnight} minutes={minutes}/>
-          <ol className="stops botanical-stops">{(stops.length?stops:[fallback]).map((stop,i)=><li key={`${stop.name}-${i}`}><span className="stop-leaf" title={`${foliageForPlace(stop.name,dayId).label} · 地域植物意象`}><img src={foliageForPlace(stop.name,dayId).image} alt=""/><b>{String(i+1).padStart(2,'0')}</b></span><div>{stop.name}<small>{day.stops[i]??'按实际进度安排短停'}</small></div>{i<legs.length&&<a className="stop-navigation" href={navigationUrl(legs[i])} target="_blank" rel="noopener noreferrer" title={`百度导航：${legs[i].origin.name}至${legs[i].destination.name}`} aria-label={`打开百度导航第${i+1}段，${legs[i].origin.name}至${legs[i].destination.name}`}><ArrowUpRight size={15}/></a>}</li>)}</ol>
-          <Button className="navigate-button" disabled={!legs.length} onClick={()=>setNavOpen(!navOpen)} aria-expanded={navOpen} aria-controls="navigation-links"><Navigation size={16}/>{legs.length?'百度导航 · 分段打开':'还车门店待确认'}<ChevronDown size={16} className={navOpen?'rotate-180':''}/></Button>
-          {navOpen&&<nav id="navigation-links" className="navigation-links" aria-label="百度分段驾车导航"><p>按顺序打开各段，保留草原途经点。</p>{legs.map((leg,i)=><a key={leg.id} href={navigationUrl(leg)} target="_blank" rel="noopener noreferrer"><span>{i+1}. {leg.origin.name} → {leg.destination.name}<small>{Math.round(leg.km)} km · {minutesText(leg.minutes)}</small></span><ArrowUpRight size={15}/></a>)}</nav>}
+          <ol className="stops botanical-stops">{(stops.length?stops:[fallback]).map((stop,i)=><li key={`${stop.name}-${i}`} data-foliage={foliageForPlace(stop.name,dayId).kind}><span className="stop-leaf" title={`${foliageForPlace(stop.name,dayId).label} · 地域植物意象`}><img src={foliageForPlace(stop.name,dayId).image} alt=""/><b>{String(i+1).padStart(2,'0')}</b></span><div>{stop.name}<small>{day.stops[i]??'按实际进度安排短停'}</small></div>{i<legs.length&&<Button variant="ghost" size="icon" className="stop-navigation" onClick={()=>{setNavOpen(true);window.setTimeout(()=>document.getElementById(`navigation-${legs[i].id}`)?.scrollIntoView({block:'nearest'}),0);}} title="选择百度或高德导航" aria-label={`选择第${i+1}段导航，${legs[i].origin.name}至${legs[i].destination.name}`}><ArrowUpRight size={15}/></Button>}</li>)}</ol>
+          <Button className="navigate-button" disabled={!legs.length} onClick={()=>setNavOpen(!navOpen)} aria-expanded={navOpen} aria-controls="navigation-links"><Navigation size={16}/>{legs.length?'地图导航 · 百度 / 高德':'还车门店待确认'}<ChevronDown size={16} className={navOpen?'rotate-180':''}/></Button>
+          {navOpen&&<RouteNavigation legs={legs}/>}
           <details className="day-note"><summary><Info size={14}/>当天提醒<ChevronDown size={14}/></summary><p>{day.note}</p></details>
         </div>
       </aside>

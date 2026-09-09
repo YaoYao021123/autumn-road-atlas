@@ -7,7 +7,7 @@ import './forest-drive.css';
 
 export function ForestDrive({onRouteSelect}:{onRouteSelect:(day:number)=>void}) {
   const [failed,setFailed]=useState(false);
-  return <section className="forest-drive" aria-labelledby="forest-drive-title">
+  return <section className="forest-drive" data-foliage="larch" aria-labelledby="forest-drive-title">
     <div className="forest-drive-stage">
       {!failed&&<picture className="forest-drive-art">
         <source media="(max-width: 760px)" srcSet="/forest-drive-960.webp"/>

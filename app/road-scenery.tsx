@@ -8,7 +8,7 @@ import { foliageForDay } from './regional-foliage';
 import './road-scenery.css';
 
 export function RoadScenery({dayId,scenes,selectedSceneId,onSelect}:{dayId:number;scenes:RoadScene[];selectedSceneId:string|null;onSelect:(id:string)=>void}) {
-  return <section className="road-scenery" aria-labelledby="road-scenery-title">
+  return <section className="road-scenery" data-foliage={foliageForDay(dayId).kind} aria-labelledby="road-scenery-title">
     <div className="road-scenery-heading"><div><span className="eyebrow"><Leaf size={14}/>风景，不只在目的地</span><h2 id="road-scenery-title">D{String(dayId).padStart(2,'0')} · 车窗外的秋天</h2></div><p>点选一处，在地图上展开。<br/><span>只标现有路线，不额外绕行。</span></p></div>
     {scenes.length?<div className="road-scene-list">{scenes.map((scene,i)=><article className={`road-scene-item ${selectedSceneId===scene.id?'is-selected':''}`} key={scene.id}>
     <Button variant="ghost" className="road-scene-select" aria-pressed={selectedSceneId===scene.id} aria-label={`在地图查看${scene.title}，${sceneKindLabels[scene.kind]}`} onClick={()=>onSelect(scene.id)}><span className={`road-scene-index ${scene.kind!=='window'?'is-parking':''}`}>{scene.kind==='window'?<><img src={foliageForDay(scene.day).image} alt=""/><b>{String(i+1).padStart(2,'0')}</b></>:<ParkingCircle size={23}/>}</span><span><small>{scene.road} · {sceneKindLabels[scene.kind]}</small><strong>{scene.title}</strong></span><ArrowUpRight size={18}/></Button>

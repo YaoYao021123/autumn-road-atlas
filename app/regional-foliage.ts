@@ -8,6 +8,10 @@ export const foliage={
 } as const;
 const days:Record<number,keyof typeof foliage>={1:'poplar',2:'birch',3:'grass',4:'birch',5:'larch',6:'larch',7:'poplar'};
 export const foliageForDay=(day:number)=>foliage[days[day]??'poplar'];
+export function foliageForContext(target:Element|null,day:number){
+  const kind=target?.closest('[data-foliage]')?.getAttribute('data-foliage');
+  return kind&&Object.hasOwn(foliage,kind)?foliage[kind as keyof typeof foliage]:foliageForDay(day);
+}
 export function foliageForPlace(name:string,day:number){
   if(/额尔古纳/.test(name))return foliage.birch;
   if(/伊尔施|阿尔山|森林公园/.test(name))return foliage.larch;
