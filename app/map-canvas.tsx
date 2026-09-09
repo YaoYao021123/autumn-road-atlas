@@ -18,11 +18,12 @@ export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback
   const [ready,setReady]=useState(false),[tileError,setTileError]=useState(false),[loadError,setLoadError]=useState(false);
   const geometry=useMemo(()=>routeGeometry(legs),[legs]);
   useEffect(()=>{
-    let disposed=false;let observer:ResizeObserver|undefined;
+    let disposed=false;let observer:ResizeObserver|undefined,resizeFrame=0;
     import('leaflet').then(L=>{
       if(disposed||!element.current)return;
       lib.current=L;
-      const m=L.map(element.current,{zoomControl:false,attributionControl:true,scrollWheelZoom:true,minZoom:4,maxZoom:16,preferCanvas:false});
+      const compact=window.matchMedia('(max-width: 760px)').matches;
+      const m=L.map(element.current,{zoomControl:false,attributionControl:true,scrollWheelZoom:!compact,minZoom:4,maxZoom:16,preferCanvas:compact,inertia:!compact,zoomAnimation:!compact,fadeAnimation:!compact,markerZoomAnimation:!compact});
       map.current=m;
       m.attributionControl.setPrefix(false);
       m.setView([47.8,121.5],6);
@@ -32,10 +33,10 @@ export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback
       tiles.on('tileerror',()=>setTileError(true));
       tiles.on('tileload',()=>setTileError(false));
       L.control.scale({position:'bottomleft',imperial:false,maxWidth:85}).addTo(m);
-      observer=new ResizeObserver(()=>m.invalidateSize({animate:false}));observer.observe(element.current);
+      observer=new ResizeObserver(()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>m.invalidateSize({animate:false}));});observer.observe(element.current);
       setReady(true);
     }).catch(()=>setLoadError(true));
-    return()=>{disposed=true;observer?.disconnect();map.current?.remove();map.current=null;};
+    return()=>{disposed=true;observer?.disconnect();cancelAnimationFrame(resizeFrame);map.current?.remove();map.current=null;};
   },[]);
 
   useEffect(()=>{
@@ -64,8 +65,9 @@ export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback
     } else car.current=null;
     const fitting=overview?allPoints:geometry.points;
     const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(fitting.length>1)m.fitBounds(L.latLngBounds(fitting),{paddingTopLeft:[55,85],paddingBottomRight:[55,140],maxZoom:11,animate:!reduce,duration:0.7});
-    else m.setView(fallback.position,10,{animate:!reduce});
+    const compact=window.matchMedia('(max-width: 760px)').matches;
+    if(fitting.length>1)m.fitBounds(L.latLngBounds(fitting),{paddingTopLeft:[55,85],paddingBottomRight:[55,140],maxZoom:11,animate:!reduce&&!compact,duration:compact?0:.7});
+    else m.setView(fallback.position,10,{animate:!reduce&&!compact});
     return()=>{layer.remove();};
   },[ready,legs,allLegs,geometry,overview,dayId,fallback]);
 
