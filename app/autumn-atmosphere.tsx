@@ -78,10 +78,10 @@ export function AutumnAtmosphere({enabled}:{enabled:boolean}) {
   if(!enabled)return null;
   return <>
     <div className="autumn-atmosphere" aria-hidden="true">
-      <div className="autumn-corner autumn-corner-one"><img src="/autumn-birch.png" alt=""/></div>
-      <div className="autumn-corner autumn-corner-two"><img src="/autumn-birch.png" alt=""/></div>
-      <div className="autumn-corner autumn-corner-three"><img src="/autumn-birch.png" alt=""/></div>
+      <div className="autumn-corner autumn-corner-one"><img src="/autumn-birch-384.png" alt=""/></div>
+      <div className="autumn-corner autumn-corner-two"><img src="/autumn-birch-384.png" alt=""/></div>
+      <div className="autumn-corner autumn-corner-three"><img src="/autumn-birch-384.png" alt=""/></div>
     </div>
-    <div className="interaction-leaves" aria-hidden="true">{Array.from({length:LEAF_POOL_SIZE},(_,index)=><img key={index} className="interaction-leaf" src="/autumn-birch.png" alt="" decoding="async" ref={node=>{if(node)pool.current[index]=node;}}/>)}</div>
+    <div className="interaction-leaves" aria-hidden="true">{Array.from({length:LEAF_POOL_SIZE},(_,index)=><img key={index} className="interaction-leaf" src="/autumn-birch-384.png" alt="" decoding="async" ref={node=>{if(node)pool.current[index]=node;}}/>)}</div>
   </>;
 }

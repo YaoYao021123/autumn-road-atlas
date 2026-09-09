@@ -85,7 +85,7 @@ export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback
       if(scene.highlight.length>1)L.polyline(scene.highlight,{color:'#bb623d',weight:8,opacity:.52,lineCap:'round',interactive:false}).addTo(layer);
       const isWindow=scene.kind==='window';
       const ordinal=scenes.filter(s=>s.day===scene.day).findIndex(s=>s.id===scene.id)+1;
-      const icon=L.divIcon({className:`scenery-marker ${isWindow?'window-marker':'parking-marker'}`,html:renderToStaticMarkup(<span className="scenery-symbol">{isWindow?<><img src="/autumn-birch.png" alt=""/><b>{String(ordinal).padStart(2,'0')}</b></>:<b>P</b>}</span>),iconSize:isWindow?[38,43]:[29,29],iconAnchor:isWindow?[19,39]:[14,36],popupAnchor:[0,-33]});
+      const icon=L.divIcon({className:`scenery-marker ${isWindow?'window-marker':'parking-marker'}`,html:renderToStaticMarkup(<span className="scenery-symbol">{isWindow?<><img src="/autumn-birch-384.png" alt=""/><b>{String(ordinal).padStart(2,'0')}</b></>:<b>P</b>}</span>),iconSize:isWindow?[38,43]:[29,29],iconAnchor:isWindow?[19,39]:[14,36],popupAnchor:[0,-33]});
       const marker=L.marker(scene.position,{icon,zIndexOffset:650,keyboard:true,title:`D${scene.day} · ${scene.title} · ${sceneKindLabels[scene.kind]}`,alt:`${scene.title}，${sceneKindLabels[scene.kind]}`}).addTo(layer);
       const label=document.createElement('span');label.textContent=scene.title;
       marker.bindTooltip(label,{direction:'top',offset:[0,-35],className:'scenery-tooltip'});
