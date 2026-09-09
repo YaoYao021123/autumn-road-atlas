@@ -35,6 +35,10 @@ for (const path of await walk(outputDir)) {
   let contents = await readFile(path, 'utf8');
   const original = contents;
   contents = contents.replaceAll('/_next/', `${base}_next/`);
+  // Vite's generated preload helper stores dependency paths without a leading
+  // slash, then prefixes them at runtime. Give that helper the project base so
+  // lazily loaded CSS and chunks also work from a GitHub Pages project URL.
+  contents = contents.replaceAll('return`/`+e}', 'return`' + base + '`+e}');
   contents = contents.replaceAll('href="/"', `href="${base}"`);
   contents = contents.replaceAll('href=\\"/\\"', `href=\\"${base}\\"`);
   if (assetPattern) contents = contents.replace(assetPattern, `$1${base}$2`);
