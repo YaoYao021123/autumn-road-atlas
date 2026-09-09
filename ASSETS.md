@@ -1,5 +1,18 @@
 # Asset provenance
 
+## Cultural reading landscape — 2026-09-09
+
+The former three-tab book gallery is now an unboxed editorial sequence. Work metadata, geography boundaries and evidence URLs live in `app/cultural-works.json`. Only the existing short novel excerpt is quoted; connective prose is original. The original three generated scene files remain intact, but only the river and forest appear in the new composition. CSS masks are presentation effects, not new photographs or edits to the source assets.
+
+- 《额尔古纳河右岸》: regional literary context, not a claim that all events occurred in today's Erguna city. The reindeer motif is not a wildlife-location promise.
+- 老舍《草原》: Chen Barag Banner visit, not the New Barag Left/Right Banners. The 1961 text's green landscape is not a 2026 autumn forecast.
+- 王伟《中国最后的驯鹿部落》: photography introduced through [Tsinghua Academy's original-image and collection record](https://www.ad.tsinghua.edu.cn/info/1219/27094.htm). No photographs copied or embedded. Genhe/Aoluguya is explicitly outside this route; the adjacent AI forest is clearly not Wang Wei's work.
+- 《大象席地而坐》: public film still from [Arsenal / Berlinale Forum 2018](https://www.arsenal-berlin.de/en/berlinale-forum/archive/program-archive/2018/forum-program/main-program/an-elephant-sitting-still-1/), remote source `https://www.arsenal-berlin.de/assets/_processed_/1/9/csm_201813696_23860_a916b77a27.jpg`, 1074 × 670. Asset researcher confirmed actual loading and inspected this image. No individual still-photographer credit or open redistribution licence supplied; do not describe it as CC or republish publicly without a rights review. The image is not a Manzhouli photograph: Manzhouli is the narrative destination; filming was in Hebei Jingxing.
+- [Criterion's official 2m30s trailer](https://www.criterionchannel.com/videos/an-elephant-sitting-still-trailer) is linked, not downloaded or autoplayed. Access depends on platform and location.
+- 《人世间》: Changchun as an actual filming city, with the provincial culture department's location list. The image reused here is the existing Xinhua 2023-10-24 Xinmin Square city photograph by Yan Linyun, explicitly not a production still or a claim that this exact frame is a filming site. CCTV's location-report page is linked, not downloaded.
+
+Research alternatives deliberately not added to the route: 《黑骏马》/Ujimqin, 《狼图腾》/Ulagai, and unverified exact film-viewpoint pins. Wure'ertu's photographs in China National Geography were considered but not embedded: the publisher restricts reuse and its image returned a Referer ACL error. No anti-hotlink bypass was attempted.
+
 ## Day-specific landscape photographs — 2026-09-09
 
 The exact image URLs, source URLs, credit strings and historical date labels are in `app/day-scenes.json`. Images are loaded from their original hosts without copying third-party files into this project. D1, D2 and D4 are explicitly labelled summer references. D3, D5, D6 and D7 are historical autumn references. No photo is represented as 2026 conditions or as proof that a specific viewpoint is included in this route.

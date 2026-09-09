@@ -1,0 +1,96 @@
+{
+  "book": {
+    "id": "right-bank",
+    "title": "额尔古纳河右岸",
+    "creator": "迟子建",
+    "year": "2005",
+    "medium": "长篇小说",
+    "recognition": "第七届茅盾文学奖",
+    "place": "额尔古纳河流域 · 大兴安岭北部",
+    "relationship": "地域文化",
+    "routeDay": 3,
+    "description": "一位鄂温克老人的回忆，把驯鹿、森林、迁徙与家族百年串在一起。经过这片北方，除了看树叶，也可以想一想：谁曾在林子里生活，怎样与它相依。",
+    "boundary": "书中使鹿鄂温克人的生活与根河敖鲁古雅密切相关，并不都发生在额尔古纳市。本次不前往根河，也不承诺途中可见驯鹿。",
+    "sources": [
+      { "label": "文艺报 · 作品与初版资料", "url": "https://wyb.chinawriter.com.cn/content/202312/01/content72638.html" },
+      { "label": "中国作家网 · 地域与文化", "url": "https://www.chinawriter.com.cn/n1/2020/1218/c429370-31970940.html" }
+    ]
+  },
+  "photography": {
+    "id": "reindeer-people",
+    "title": "中国最后的驯鹿部落",
+    "creator": "王伟",
+    "year": "2013 年起持续拍摄",
+    "medium": "摄影系列",
+    "recognition": "30 幅使鹿鄂温克人肖像于 2020 年被中国民族博物馆永久收藏",
+    "place": "根河 · 敖鲁古雅",
+    "relationship": "区域延伸阅读 · 非本次到访",
+    "description": "读过小说，再去看真实而具体的面孔。王伟多次进入敖鲁古雅，以肖像记录使鹿鄂温克人；镜头里的森林不再只是秋色，也是人们生活与记忆的地方。",
+    "boundary": "根河不在本次路线；这是一组与小说对读的摄影，不新增旅行站点。",
+    "displayPolicy": "source-only",
+    "rights": "未确认图片开放转载许可，仅链接摄影原作；本页生成图不代表该摄影系列。",
+    "sources": [
+      { "label": "清华美院 · 摄影原作与收藏记录", "url": "https://www.ad.tsinghua.edu.cn/info/1219/27094.htm" }
+    ]
+  },
+  "grassland": {
+    "id": "grassland",
+    "title": "草原",
+    "creator": "老舍",
+    "year": "1961",
+    "medium": "散文 ·《内蒙风光》节选",
+    "recognition": "收入人教版语文教材",
+    "place": "海拉尔周边 · 陈巴尔虎旗",
+    "relationship": "作品访问地",
+    "routeDay": 3,
+    "description": "从辽阔草色写到骑马迎客、奶茶相待，老舍记下了访问陈巴尔虎旗的感受。海拉尔向额尔古纳出发的这一天，熟悉的课文有了地理上的方向。",
+    "boundary": "作品记录 1961 年的访问，文字中的碧色不是今年的叶色预报。陈巴尔虎旗不是 D4 的新巴尔虎左旗、右旗，也不是 186 彩带河的精确取景点。",
+    "sources": [
+      { "label": "国家中小学智慧教育平台 · 课文", "url": "https://v2.ykt.cbern.com.cn/65/document/1b474b1f7d384c4cb9446eec61bb507b/pdf.pdf" },
+      { "label": "内蒙古日报 · 原作与教材沿革", "url": "https://jswm.nmgnews.com.cn/system/2020/06/04/012922603.shtml" }
+    ]
+  },
+  "film": {
+    "id": "elephant",
+    "title": "大象席地而坐",
+    "creator": "胡波",
+    "year": "2018",
+    "medium": "电影",
+    "recognition": "第 55 届金马奖最佳剧情片",
+    "place": "满洲里",
+    "relationship": "叙事中的远方 · 非取景地",
+    "routeDay": 3,
+    "description": "几个人被各自的困境推向同一个地名：满洲里。电影里的远行并不轻盈；它让这座边境城市，成为人物想暂时离开眼前生活的方向。",
+    "boundary": "满洲里是人物向往的目的地，不是影片实拍地。影片在河北井陉拍摄；这里不设置电影里的动物园或大象打卡点。",
+    "image": "https://www.arsenal-berlin.de/assets/_processed_/1/9/csm_201813696_23860_a916b77a27.jpg",
+    "imageAlt": "《大象席地而坐》官方影片存档中的户外剧照，人物位于画面中；这不是满洲里实景",
+    "imageCredit": "《大象席地而坐》剧照 · Arsenal / Berlinale Forum 2018",
+    "imageRights": "电影节影片存档的公开剧照，未确认开放转载许可；本地远程展示，未下载。",
+    "watchUrl": "https://www.criterionchannel.com/videos/an-elephant-sitting-still-trailer",
+    "watchLabel": "看官方预告 · 2分30秒",
+    "sources": [
+      { "label": "Arsenal / 柏林 Forum · 影片与剧照", "url": "https://www.arsenal-berlin.de/en/berlinale-forum/archive/program-archive/2018/forum-program/main-program/an-elephant-sitting-still-1/" },
+      { "label": "Rediance · 主创与奖项", "url": "https://www.rediancefilms.com/film.php-30.html?id=18" },
+      { "label": "报导者 · 摄影师范超谈河北拍摄", "url": "https://www.twreporter.org/a/director-hu-bo-an-elephant-sitting-still" }
+    ]
+  },
+  "homecoming": {
+    "id": "world",
+    "title": "人世间",
+    "creator": "李路导演 · 梁晓声原著",
+    "year": "2022",
+    "medium": "电视剧",
+    "recognition": "第 31 届中国电视金鹰奖优秀电视剧",
+    "place": "长春",
+    "relationship": "真实取景城市",
+    "routeDay": 7,
+    "description": "离开山林，回到有人赶车、买菜、回家的街道。《人世间》把许多生活片段留在长春：省文旅厅公布的取景名单包括 54、55 路有轨电车、地质宫和龙嘉机场。",
+    "boundary": "长春是电视剧取景城市，不把剧中“吉春”直接当作真实城市名称。D7 只保留还车安排，不新增影视打卡；新民广场配图只是城市历史影像，不是剧照。",
+    "watchUrl": "https://news.cctv.com/2022/02/28/VIDEkRdtWKyixLyvIFS4fdVk220228.shtml",
+    "watchLabel": "央视 · 看长春取景地报道",
+    "sources": [
+      { "label": "吉林省文旅厅 · 长春取景名单", "url": "https://xxgk.jl.gov.cn/zcbm/fgw_98067/xxgkmlqy/202206/t20220621_8484750.html" },
+      { "label": "人民网 · 金鹰奖与拍摄城市", "url": "https://jl.people.com.cn/n2/2022/1109/c349771-40187052.html" }
+    ]
+  }
+}

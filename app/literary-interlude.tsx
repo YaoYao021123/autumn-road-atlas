@@ -1,77 +1,84 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, BookOpen, MoveUpRight } from 'lucide-react';
+import { ArrowUpRight, BookOpen, Camera, ChevronDown, Film, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import content from './literary-scenes.json';
+import works from './cultural-works.json';
+import dayScenes from './day-scenes.json';
 import './literary.css';
 
 type Props = { motionEnabled: boolean; onRouteSelect: (day: number) => void };
+type Work = { title:string; boundary:string; sources:{label:string;url:string}[] };
+
+function WorkSources({work}:{work:Work}) {
+  return <details className="culture-provenance"><summary>作品与这段路的关系<ChevronDown size={14}/></summary><p>{work.boundary}</p><div>{work.sources.map(source=><a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">{source.label}<ArrowUpRight size={12}/></a>)}</div></details>;
+}
 
 export function LiteraryInterlude({ motionEnabled, onRouteSelect }: Props) {
-  const [sceneId, setSceneId] = useState('river');
-  const [seen, setSeen] = useState(false);
-  const [failedImages, setFailedImages] = useState<string[]>([]);
   const section = useRef<HTMLElement>(null);
+  const [failedImages, setFailedImages] = useState<string[]>([]);
+  const failed=(id:string)=>setFailedImages(ids=>ids.includes(id)?ids:[...ids,id]);
+  const river=content.scenes[0],forest=content.scenes[1],city=dayScenes[6];
 
-  useEffect(() => {
-    const element = section.current;
-    if (!element || !('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setSeen(true); observer.disconnect(); }
-    }, { threshold: 0.12 });
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
+  useEffect(()=>{
+    const element=section.current;
+    if(!element||!motionEnabled||!('IntersectionObserver' in window))return;
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
+    }),{threshold:.12});
+    element.querySelectorAll('[data-culture-scene]').forEach(scene=>observer.observe(scene));
+    return()=>observer.disconnect();
+  },[motionEnabled]);
 
-  return <section ref={section} id="right-bank" className="literary-interlude" aria-labelledby="literary-heading" data-motion={motionEnabled} data-seen={seen}>
-    <header className="literary-header">
-      <div>
-        <span className="literary-eyebrow"><BookOpen size={16} strokeWidth={1.3}/>路上的一本书</span>
-        <h2 id="literary-heading">额尔古纳河<span>右岸</span></h2>
-      </div>
-      <p>让地图告诉我们去哪里，<br/>让一本书，改变观看的方式。</p>
+  return <section ref={section} id="right-bank" className="literary-interlude culture-story" aria-labelledby="literary-heading" data-motion={motionEnabled}>
+    <header className="culture-heading">
+      <div><span className="culture-eyebrow"><BookOpen size={15}/>北方的另一种地图</span><h2 id="literary-heading">路上，<em>读到北方。</em></h2></div>
+      <nav aria-label="沿途文化篇章"><a href="#culture-river">河流</a><a href="#culture-grassland">草原</a><a href="#culture-cinema">远方</a><a href="#culture-homecoming">归途</a></nav>
     </header>
 
-    <Tabs value={sceneId} onValueChange={value => setSceneId(String(value))} className="literary-tabs">
-      <TabsList className="literary-selector" aria-label="切换文学氛围图">
-        {content.scenes.map(scene => <TabsTrigger key={scene.id} value={scene.id} className="literary-tab">
-          <span className="literary-tab-number">{scene.number}</span>
-          <span>{scene.title}<small>{scene.mood}</small></span>
-          <MoveUpRight size={16} aria-hidden="true"/>
-        </TabsTrigger>)}
-      </TabsList>
+    <article id="culture-river" className="culture-river culture-scene" data-culture-scene aria-labelledby="river-work-title">
+      <figure className="culture-river-art">
+        {!failedImages.includes('river')&&<img src={river.image} alt={river.alt} width={1536} height={1024} loading="lazy" decoding="async" onError={()=>failed('river')}/>}
+        <figcaption>{failedImages.includes('river')?'画面暂未载入 · ':''}原创 AI 氛围图 · 非沿途实景</figcaption>
+      </figure>
+      <div className="culture-copy culture-river-copy">
+        <span className="culture-location">01 / 河流与时间 <i>额尔古纳方向</i></span>
+        <h3 id="river-work-title">额尔古纳河<br/><em>右岸</em></h3>
+        <p className="culture-work-meta">{works.book.creator} · {works.book.year} · {works.book.recognition}</p>
+        <figure className="culture-quotation"><blockquote cite={content.quoteSource}>{content.quote}</blockquote><figcaption><a href={content.quoteSource} target="_blank" rel="noopener noreferrer">小说短引 · 原文出处<ArrowUpRight size={12}/></a></figcaption></figure>
+        <p className="culture-body">{works.book.description}</p>
+        <Button variant="ghost" className="culture-route-link" onClick={()=>onRouteSelect(works.book.routeDay)}>回到 D03 · 额尔古纳方向<ArrowUpRight size={16}/></Button>
+        <WorkSources work={works.book}/>
+      </div>
+      <span className="culture-sideword" aria-hidden="true">河流不赶路</span>
+    </article>
 
-      {content.scenes.map(scene => <TabsContent key={scene.id} value={scene.id} className="literary-panel">
-        <div className="literary-spread" data-scene={scene.id}>
-          <div className="literary-text">
-            <span className="literary-folio">山林来信 <i>/</i> {scene.number}</span>
-            <figure className="literary-quotation">
-              <blockquote cite={content.quoteSource}>{content.quote}</blockquote>
-              <figcaption>迟子建《额尔古纳河右岸》<a href={content.quoteSource} target="_blank" rel="noopener noreferrer" aria-label="查看中国作家网中的原文出处">原文出处<ArrowUpRight size={12}/></a></figcaption>
-            </figure>
-            <div className="literary-original">
-              <span>原创旁白</span>
-              <p>{scene.lines.map(line => <span key={line}>{line}</span>)}</p>
-            </div>
-            <Button variant="ghost" className="literary-route-link" onClick={() => onRouteSelect(scene.routeDay)}>{scene.routeLabel}<ArrowUpRight size={16}/></Button>
-          </div>
-          <figure className="literary-artwork">
-            <div className="literary-image-wrap">
-              {failedImages.includes(scene.id)
-                ? <div className="literary-image-error"><BookOpen size={24}/><p>画面暂未载入，文字仍可阅读。</p></div>
-                : <img src={scene.image} alt={scene.alt} width={1536} height={1024} loading="lazy" decoding="async" onError={() => setFailedImages(ids => ids.includes(scene.id) ? ids : [...ids, scene.id])}/>}
-            </div>
-            <figcaption><span>{scene.motif}</span><span>AI 氛围创作 · 非沿途实景</span></figcaption>
-          </figure>
-        </div>
-      </TabsContent>)}
-    </Tabs>
+    <aside className="culture-photography culture-scene" data-culture-scene aria-labelledby="photography-title">
+      <figure className="culture-forest-art">
+        {!failedImages.includes('forest')&&<img src={forest.image} alt={forest.alt} width={1536} height={1024} loading="lazy" decoding="async" onError={()=>failed('forest')}/>}
+        <figcaption>原创 AI 森林意象<br/>不是王伟摄影原作，亦非观鹿地点</figcaption>
+      </figure>
+      <div className="culture-copy culture-photo-copy"><span className="culture-eyebrow"><Camera size={15}/>把目光从树木移向人</span><h3 id="photography-title">森林里，<br/>有人生活。</h3><p className="culture-work-meta">王伟 ·《{works.photography.title}》摄影系列</p><p className="culture-body">{works.photography.description}</p><p className="culture-photo-recognition">{works.photography.recognition}。</p><a className="culture-text-link" href={works.photography.sources[0].url} target="_blank" rel="noopener noreferrer">去看摄影原作<ArrowUpRight size={17}/></a><p className="culture-margin-note">根河敖鲁古雅 · 区域延伸阅读，不在本次路线<br/>摄影原图未确认转载许可，仅提供原作入口。</p></div>
+    </aside>
 
-    <div className="literary-colophon">
-      <p>画面受小说自然意象启发，不是情节复刻；书中生活地域不等同于本次路线。驯鹿与火塘是文学意象，不表示途中可观鹿或可野外生火。</p>
-      <a href={content.motifSource} target="_blank" rel="noopener noreferrer">关于书中的山林<ArrowUpRight size={13}/></a>
-    </div>
+    <article id="culture-grassland" className="culture-grassland culture-scene" data-culture-scene aria-labelledby="grassland-work-title">
+      <span className="culture-grassland-word" aria-hidden="true">旷</span>
+      <div className="culture-copy culture-grassland-title"><span className="culture-location">02 / 草原与记忆 <i>海拉尔周边</i></span><h3 id="grassland-work-title">课本里的<span>《草原》</span><br/>这次，在车窗外。</h3><p className="culture-work-meta">老舍 · 1961 ·《内蒙风光》节选</p><p className="culture-verse">在出发以前，<br/>我们已经在文字里，来过一次。</p></div>
+      <div className="culture-copy culture-grassland-copy"><span className="culture-small-title">熟悉的文字，有了方向</span><p className="culture-body">{works.grassland.description}</p><p className="culture-season-note">把课本里的碧色留给记忆，<br/>把今年的秋色留给车窗。</p><Button variant="ghost" className="culture-route-link" onClick={()=>onRouteSelect(works.grassland.routeDay)}>回到 D03 · 海拉尔出发<ArrowUpRight size={16}/></Button><WorkSources work={works.grassland}/></div>
+    </article>
+
+    <article id="culture-cinema" className="culture-cinema culture-scene" data-culture-scene aria-labelledby="cinema-work-title">
+      <figure className="culture-cinema-art">{!failedImages.includes('film')&&<img src={works.film.image} alt={works.film.imageAlt} width={1074} height={670} loading="lazy" decoding="async" onError={()=>failed('film')}/>}<figcaption><a href={works.film.sources[0].url} target="_blank" rel="noopener noreferrer">{works.film.imageCredit}<ArrowUpRight size={12}/></a></figcaption></figure>
+      <div className="culture-cinema-body culture-copy"><span className="culture-location">03 / 城市与远方 <i>满洲里</i></span><span className="culture-medium"><Film size={15}/>电影 · {works.film.year}</span><h3 id="cinema-work-title">大象<br/>席地而坐</h3><p className="culture-work-meta">胡波导演 · {works.film.recognition}</p><p className="culture-cinema-line">不是所有远方，<br/>都为了看风景。</p><p className="culture-body">{works.film.description}</p><p className="culture-cinema-boundary">叙事中的目的地，不是满洲里取景纪录。<br/>冷峻而沉重的长片，适合出发前静下来观看。</p><div className="culture-cinema-actions"><a className="culture-text-link" href={works.film.watchUrl} target="_blank" rel="noopener noreferrer"><Play size={16}/>{works.film.watchLabel}<ArrowUpRight size={16}/></a><Button variant="ghost" className="culture-route-link" onClick={()=>onRouteSelect(works.film.routeDay)}>回到 D03 · 满洲里<ArrowUpRight size={16}/></Button></div><WorkSources work={works.film}/></div>
+      <span className="culture-cinema-place" aria-hidden="true">满洲里</span>
+    </article>
+
+    <article id="culture-homecoming" className="culture-homecoming culture-scene" data-culture-scene aria-labelledby="homecoming-work-title">
+      <figure className="culture-city-art">{!failedImages.includes('city')&&<img src={city.image} alt="长春新民广场周边秋日航拍，2023年10月24日新华社历史照片，用于城市氛围；不是《人世间》剧照或已安排的取景地" width={1000} height={667} loading="lazy" decoding="async" onError={()=>failed('city')}/>}<figcaption><a href={city.source} target="_blank" rel="noopener noreferrer">长春新民广场 · 2023.10.24 · 新华社颜麟蕴摄<ArrowUpRight size={12}/></a><span>历史城市影像 · 非剧照</span></figcaption></figure>
+      <div className="culture-copy culture-homecoming-copy"><span className="culture-location">04 / 回到日常 <i>长春</i></span><h3 id="homecoming-work-title">走过山河，<br/>回到<span>人世间。</span></h3><p className="culture-work-meta">电视剧《人世间》· 2022 · 李路导演 / 梁晓声原著</p><p className="culture-body">{works.homecoming.description}</p><a className="culture-text-link" href={works.homecoming.watchUrl} target="_blank" rel="noopener noreferrer"><Play size={15}/>{works.homecoming.watchLabel}<ArrowUpRight size={16}/></a><Button variant="ghost" className="culture-route-link" onClick={()=>onRouteSelect(works.homecoming.routeDay)}>回到 D07 · 10:00 到店还车<ArrowUpRight size={16}/></Button><WorkSources work={works.homecoming}/></div>
+    </article>
+
+    <footer className="culture-colophon"><p>除标注的小说短引外，串联文字均为原创旁白。文学意象、电影叙事、真实取景地与摄影拍摄地分别标明；作品不等于旅行打卡清单。</p><span>让作品改变观看，<br/>不让故事催促赶路。</span></footer>
   </section>;
 }
