@@ -1,5 +1,13 @@
 # Validation notes — 2026-09-09
 
+## Latest feedback — detailed map and regional foliage
+
+- Ultrawide screenshot follow-up: bounded the shared atlas to 1480 CSS px; routes use 12 px white halo, 9 px dark-blue casing, 6 px blue core and 6 px gray playback overlay. Scenic dashed corridors use a separate lower pane, so they cannot paint over the navigation line. Moved overlapping basemap/scenery controls apart. Explicit non-live-traffic legend; no invented congestion classes. Width/colour/layer-order source guards added to the map-delivery check.
+
+- Restored detailed OSM tiles as the default; removed the grayscale/brightness filter that suppressed text contrast. Leaflet `detectRetina` uses higher-zoom tiles on high-DPI displays; `updateWhenIdle` delays requests during continuous panning. Local physical water context remains as a fallback, not a substitute for map detail. Higher pixel density costs additional tile requests; no faster-network claim is made.
+- Four original motif families: poplar, existing birch, steppe grass and larch needles. Seven day assignments plus place-specific stop assignments, map/list markers and interaction leaves are covered by `check-regional-foliage.mjs`; transparency and per-asset byte budgets checked. Shape choices express regional landscapes, not local endemism or precise botanical identification. No continuous falling animation added.
+- Three new generated images visually inspected individually before integration; 320 px transparent WebP exports retained. Existing routes, navigation coordinates, default D1, static forest scene and cultural content unchanged. No browser visual or interaction QA requested or performed.
+
 ## 2026-09-10 — publication/performance revision (supersedes earlier local-only notes)
 
 - Probed the actual GitHub Pages and ChatGPT Site HTML and selected resources with curl. Both were stale D4 builds using the 2,426,541-byte Wikimedia source and old PNG artwork. Single samples: GitHub HTML 0.80 s, Site HTML 2.97 s, Wikimedia original 2.80 s, one OSM tile 0.75 s. This isolates multiple request chains; it does **not** prove all-region latency, browser LCP or a service outage.

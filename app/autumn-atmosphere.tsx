@@ -2,10 +2,12 @@
 /* oxlint-disable next/no-img-element -- decorative local PNG assets are statically shipped and no image-optimization server is present. */
 
 import { useEffect, useRef } from 'react';
+import { foliageForDay } from './regional-foliage';
 
 const LEAF_POOL_SIZE=5;
 
-export function AutumnAtmosphere({enabled}:{enabled:boolean}) {
+export function AutumnAtmosphere({enabled,day=1}:{enabled:boolean;day?:number}) {
+  const leaf=foliageForDay(day);
   const pool=useRef<HTMLImageElement[]>([]);
   useEffect(()=>{
     if(!enabled||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -74,14 +76,14 @@ export function AutumnAtmosphere({enabled}:{enabled:boolean}) {
       if(scrollTimer)window.clearTimeout(scrollTimer);
       leafPool.forEach(leaf=>{leaf.dataset.active='false';leaf.style.animation='';});
     };
-  },[enabled]);
+  },[enabled,day]);
   if(!enabled)return null;
   return <>
     <div className="autumn-atmosphere" aria-hidden="true">
-      <div className="autumn-corner autumn-corner-one"><img src="/autumn-birch-384.webp" alt=""/></div>
-      <div className="autumn-corner autumn-corner-two"><img src="/autumn-birch-384.webp" alt=""/></div>
-      <div className="autumn-corner autumn-corner-three"><img src="/autumn-birch-384.webp" alt=""/></div>
+      <div className="autumn-corner autumn-corner-one"><img src={leaf.image} alt=""/></div>
+      <div className="autumn-corner autumn-corner-two"><img src={leaf.image} alt=""/></div>
+      <div className="autumn-corner autumn-corner-three"><img src={leaf.image} alt=""/></div>
     </div>
-    <div className="interaction-leaves" aria-hidden="true">{Array.from({length:LEAF_POOL_SIZE},(_,index)=><img key={index} className="interaction-leaf" src="/autumn-birch-384.webp" alt="" decoding="async" ref={node=>{if(node)pool.current[index]=node;}}/>)}</div>
+    <div className="interaction-leaves" aria-hidden="true">{Array.from({length:LEAF_POOL_SIZE},(_,index)=><img key={index} className="interaction-leaf" src={leaf.image} alt="" decoding="async" ref={node=>{if(node)pool.current[index]=node;}}/>)}</div>
   </>;
 }

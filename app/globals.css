@@ -23,7 +23,7 @@ button,a,input { -webkit-tap-highlight-color:transparent; }
 button:not(:disabled),a,summary { cursor:pointer; }
 a { color:inherit; }
 button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #bd542b80; outline-offset:4px; }
-.atlas { max-width:1920px; margin:0 auto; padding:0 40px; }
+.atlas { width:100%; max-width:1480px; margin:0 auto; padding:0 40px; }
 .site-header { height:82px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:20px; }
 .brand { display:flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--title-font); font-size:23px; font-weight:600; letter-spacing:2px; }
 .brand svg { color:var(--primary); stroke-width:1.5; }
@@ -87,7 +87,7 @@ h2 svg { width:21px; height:21px; stroke-width:1.3; color:#8a937f; }
 .landscape figcaption a:hover { text-decoration:underline; }
 .map-stage { min-width:0; position:relative; background:#fff; overflow:hidden; isolation:isolate; }
 .map-canvas { width:100%; height:100%; background:#fff; z-index:0; font-family:var(--body-font); }
-.leaflet-tile-pane { filter:grayscale(.72) saturate(.42) brightness(1.1) contrast(.94); opacity:.97; }
+.leaflet-tile-pane { filter:none; opacity:1; }
 .leaflet-container .leaflet-control-attribution { font-size:10px; background:#fffffff0; padding:3px 8px; color:#69745f; }
 .leaflet-control-attribution a { color:#5a6d4b; }
 .leaflet-control-scale { margin:0 0 6px 12px!important; }
@@ -96,7 +96,7 @@ h2 svg { width:21px; height:21px; stroke-width:1.3; color:#8a937f; }
 .leaflet-tooltip.place-label.active { color:#394132; font-size:13px; font-weight:500; background:#fff; }
 .leaflet-tooltip.place-label::before { display:none; }
 .car-marker { background:transparent; border:0; }
-.car-symbol { width:38px; height:38px; display:flex; align-items:center; justify-content:center; background:#fff; color:var(--primary); border:2px solid #b34a24; border-radius:50%; box-shadow:0 3px 12px #7f411c35,0 0 0 5px #ffffff65; }
+.car-symbol { width:38px; height:38px; display:flex; align-items:center; justify-content:center; background:#fff; color:#2163d6; border:2px solid #164695; border-radius:50%; box-shadow:0 3px 12px #16365b35,0 0 0 5px #ffffffb0; }
 .map-loading { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:15px; font-size:14px; color:#6c7a5c; background:#fff; }
 .map-top-label { position:absolute; top:21px; left:23px; z-index:450; max-width:calc(100% - 145px); font-size:12px; padding:10px 13px; border-radius:4px; background:#ffffffef; box-shadow:0 3px 14px #1d2d1c09; }
 .map-view-switch { position:absolute; top:21px; right:21px; z-index:450; background:#fff; border-radius:4px; display:flex; padding:3px; border:1px solid #e2e7d9; }
@@ -104,11 +104,18 @@ h2 svg { width:21px; height:21px; stroke-width:1.3; color:#8a937f; }
 .map-view-switch button.selected { background:#f1f3ef; color:#435036; }
 .map-tools { display:flex; flex-direction:column; position:absolute; top:82px; right:21px; z-index:450; gap:3px; }
 .map-tools button { width:35px; height:35px; background:white; border-color:#dce3d3; border-radius:3px; color:#667555; }
-.map-basemap-switch { position:absolute; top:78px; left:23px; z-index:450; display:flex; margin:0; padding:3px; min-width:0; background:#fff; border:1px solid #e2e7d9; border-radius:4px; }
-.map-basemap-switch button { min-height:29px; padding:0 9px; font-size:11px; border-radius:2px; color:#7c8173; cursor:pointer; }
+.map-basemap-switch { position:absolute; top:70px; left:164px; z-index:450; display:flex; margin:0; padding:0 3px; min-width:0; background:#fff; border:1px solid #e2e7d9; border-radius:4px; }
+.map-basemap-switch button { min-height:30px; padding:0 9px; font-size:11px; border-radius:2px; color:#7c8173; cursor:pointer; }
 .map-basemap-switch button[aria-pressed=true] { background:#f3f1e9; color:#806135; }
 .map-basemap-switch button:focus-visible { outline:2px solid #ad633b; outline-offset:2px; }
 .map-network-note { position:absolute; top:122px; left:23px; z-index:450; background:white; padding:8px 10px; font-size:12px; color:#92542d; max-width:calc(100% - 92px); border-radius:4px; }
+.map-route-key { position:absolute; left:23px; bottom:130px; z-index:450; display:flex; align-items:center; flex-wrap:wrap; gap:7px; padding:6px 9px; border-radius:3px; background:#fffffff2; color:#586373; font-size:12px; pointer-events:none; }
+.map-route-key i,.map-route-key em { display:inline-block; width:18px; height:5px; border-radius:3px; background:#2163d6; border:1px solid #164695; }
+.map-route-key em { background:#8291a5; border-color:#8291a5; margin-left:5px; }
+.map-route-key small { margin-left:6px; font-size:11px; color:#7c8288; }
+.map-stage .play-button { background:#2163d6; }
+.map-stage .play-button:hover { background:#164695; }
+.map-stage .route-slider [data-slot=slider-thumb] { background:#2163d6; box-shadow:0 0 0 1px #a9c4ec; }
 .playback { position:absolute; left:23px; right:23px; bottom:32px; z-index:450; min-height:87px; background:#fff; border:1px solid #dfe5d6; border-radius:7px; display:flex; align-items:center; gap:16px; padding:15px 18px; box-shadow:0 5px 20px #18271c0b; }
 .play-button { width:42px; height:42px; border-radius:50%; flex-shrink:0; }
 .play-button svg { width:16px!important; height:16px!important; }
@@ -154,7 +161,7 @@ h2 svg { width:21px; height:21px; stroke-width:1.3; color:#8a937f; }
 @media(max-width:760px) { .atlas { padding:0 16px; } .site-header { height:72px; } .brand { font-size:21px; gap:8px; } .brand small { font-size:8px; letter-spacing:1.2px; } .return-deadline { font-size:12px; max-width:140px; text-align:right; } .page-heading { min-height:100px; padding:20px 0; } h1 { font-size:29px; } .heading-note { display:none; } .workspace { display:flex; flex-direction:column-reverse; height:auto; max-height:none; border-radius:6px; min-height:0; } .map-stage { height:455px; flex:none; } .day-panel { max-height:none; overflow:visible; padding:24px; } .day-metrics { margin:18px 0; } .landscape img { height:180px; } .days-navigation { margin-top:14px; overflow-x:auto; position:sticky; bottom:0; z-index:500; background:white; box-shadow:0 -5px 15px #1d2c1910; } .days-list { min-width:870px; } .day-tab { height:72px!important; } .page-footer { font-size:11px; flex-direction:column; gap:6px; } .map-top-label { left:12px; top:13px; padding:8px 10px; font-size:11px; max-width:calc(100% - 122px); } .map-view-switch { top:12px; right:12px; } .map-view-switch button { padding:0 9px; font-size:11px; height:26px; } .map-tools { right:12px; top:64px; } .playback { left:10px; right:10px; bottom:31px; padding:13px 12px; gap:10px; } .playback strong { font-size:12px; } .playback strong>span { font-size:11px; } .playback .play-button { width:37px; height:37px; } .replay-button { width:25px; } .trip-settings { gap:22px; align-items:flex-start; } .settings-title { width:100%; } .overnight-control { padding-top:25px; font-size:12px; gap:6px; } .overnight-control>svg { display:none; } .endpoint-field { flex:1; } .total-distance { width:100%; display:flex; justify-content:space-between; align-items:center; text-align:left; } .leaflet-container .leaflet-control-attribution { font-size:8px; } .map-network-note { top:62px; left:12px; font-size:11px; } }
 @media(max-width:390px) { .return-deadline svg { display:none; } .return-deadline { max-width:120px; font-size:11px; } .overnight-control { padding-top:0; } .trip-settings { gap:18px; } .map-top-label { max-width:calc(100% - 110px); font-size:10px; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
-/* Autumn atlas: white field, burnt-orange routes, quiet pine-green typography. */
+/* Autumn editorial palette; navigation uses a distinct functional blue. */
 .page-heading .eyebrow { color:#70806e; }
 .brand svg { color:#bd642c; }
 .map-stage,.map-canvas { background:#fff; }
@@ -201,6 +208,10 @@ h2 svg { width:21px; height:21px; stroke-width:1.3; color:#8a937f; }
   .map-view-switch { top:10px; right:10px; }
   .map-view-switch button { min-width:44px; min-height:36px; padding:0 9px; font-size:12px; }
   .map-tools { right:10px; top:106px; gap:5px; }
+  .map-basemap-switch { top:59px; left:152px; }
+  .map-basemap-switch button { min-height:34px; padding:0 7px; }
+  .map-route-key { left:12px; bottom:97px; max-width:calc(100% - 74px); font-size:11px; gap:5px; }
+  .map-route-key small { flex-basis:100%; margin-left:0; }
   .map-tools button { width:42px; height:42px; }
   .playback { left:10px; right:10px; bottom:12px; min-height:76px; padding:10px 11px; gap:9px; border-radius:6px; }
   .playback strong { font-size:12px; }

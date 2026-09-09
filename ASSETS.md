@@ -148,6 +148,49 @@ Constraints: exactly one standalone car; front points UP, rear points DOWN; no p
 - `app/regional-water.generated.json`: 5,992 bytes, 10 river/lake features derived from Natural Earth 1:50m, [public domain](https://www.naturalearthdata.com/about/terms-of-use/). Official source: [Natural Earth vector repository](https://github.com/nvkelso/natural-earth-vector/tree/master/geojson), `ne_50m_rivers_lake_centerlines.geojson` (Git blob `6f9d88ea3498448c7f29f458ce42a771a36bd6be`) and `ne_50m_lakes.geojson` (`5ddced58279ea13ae5023929f135bb7ecfd12d95`). Generator `scripts/prepare-regional-water.mjs` keeps regional physical features, drops outside river vertices and rounds to four decimals. Deliberately no political boundaries, invented roads or tile imagery. Only approximate geographic context; route coordinates themselves stay full precision.
 - Detailed OpenStreetMap tiles are optional, requested directly by the browser only after selection, with visible attribution and ordinary HTTP caching. Follow the [OSM tile usage policy](https://operations.osmfoundation.org/policies/tiles/); no bulk downloading, prefetch or map proxy.
 
+## Regional foliage — 2026-09-10
+
+Map hierarchy references: [AMap documented route colours](https://developer.amap.com/api/wia-openapi/guide/wia-content/route), [AMap road-condition meaning](https://www.amap.com/ssr/doc/route-plan), and [Baidu JS map documentation](https://lbsyun.baidu.com/docs/jsapi?title=jspopularGL/guide/show). We use our own functional blue route/casing with gray replay state rather than copying a branded interface or inventing red/yellow/green traffic data. The wider site keeps its autumn palette. [Leaflet detectRetina](https://leafletjs.com/reference.html#tilelayer-detectretina) increases tile density on high-DPI displays; it does not create vector map data.
+
+New built-in image_gen assets, one request each, no variants or retries. Selected and visually inspected by the Site owner. Generated originals are 1254×1254 RGBA, with genuine alpha; delivery exports are 320×320 WebP, quality 80, preserving alpha. Existing birch asset is reused. Final paths:
+
+- `/Users/yaoyao/code/trip/route-map/public/leaf-poplar-v1.webp`
+- `/Users/yaoyao/code/trip/route-map/public/leaf-grass-v1.webp`
+- `/Users/yaoyao/code/trip/route-map/public/leaf-larch-v1.webp`
+
+These are original regional landscape motifs, not identification plates or city emblems. Grass morphology is intentionally labelled only “草原秋草”, not a taxonomically verified species. Context sources: [national forestry report on northeastern poplar shelter/landscape planting](https://www.forestry.gov.cn/c/www/lcdt/512871.jhtml), [Hulunbuir research station grassland vegetation](https://hlg.cern.ac.cn/content?id=23367), [Ministry of Ecology and Environment report on Arxan larch and birch](https://www.mee.gov.cn/xxgk2018/xxgk/xxgk15/201910/t20191024_738911_wh.html). D2/D4 motifs represent crossing the forest–steppe transition, D6 the Arxan departure; stop icons can differ within the same day. No route changes or new botanical stops.
+
+### Final prompts — shared prefix plus one subject per request
+
+```text
+Use case: photorealistic-natural
+Asset type: isolated botanical specimen for a travel website, natural photographic cutout displayed at 50–70 px.
+Scene/backdrop: genuinely transparent background, RGBA PNG with real alpha, NOT a white, black, grey or checkerboard background.
+Style/medium: photorealistic natural botanical macro photography with fine veins, tactile organic texture and believable imperfect edges; original landscape-inspired botanical imagery, not a scientific identification plate or city-specific plant claim.
+Composition/framing: exactly one isolated specimen centered in a 1024 x 1024 square, complete silhouette including stem, occupying about 80% of the canvas, modest natural diagonal, sufficient visual mass to remain legible as a small website icon.
+Lighting/mood: soft natural light, realistic gentle self-shading only.
+Color palette: warm golden yellow and ochre gold, subtle amber brown stem; avoid large green areas.
+Constraints: no text, labels, watermark, ground, background, cast shadow, border, sticker outline, frame or extra objects. Preserve real transparency.
+```
+
+Poplar:
+
+```text
+Primary request: a single golden autumn POPLAR leaf (genus Populus inspired): broad ovate almost round leaf blade, shallow wavy teeth along the margin, subtle pointed apex, and a noticeably long slender petiole. A broad recognizable blade with fine natural branching veins and slight organic curl. The petiole and blade belong to ONE leaf. Absolutely no deeply lobed maple shape and no fan-shaped ginkgo shape.
+```
+
+Grass:
+
+```text
+Primary request: one small sprig of autumn steppe grass, feathergrass-inspired: two or three slender elongated curling golden leaves and a sparse delicate seed head with long fine awns, an airy slender silhouette. Keep the leaves broad enough and the central grass form compact enough to read at 50–70 px, while long awns remain gracefully visible. Clear grass form with flowing thin leaves, not a broad tree leaf. The seed head must be sparse and light, never a plump wheat ear, barley bundle or dense pampas plume.
+```
+
+Larch:
+
+```text
+Primary request: one short Greater Khingan larch-inspired autumn twig, with warm golden thin needle leaves growing in distinct radiating tufts along a slim brown short branch. A compact, unmistakable needle-leaf twig, multiple golden needle clusters with airy space between them, organically varied lengths and gentle curves, enough grouped mass to read at 50–70 px. Needles radiate like small soft starbursts from short shoots along the twig. No broad leaves, no cones, no pinecone, no evergreen green bough. Original landscape-inspired larch imagery.
+```
+
 ## Final leaf generation prompt
 
 Use case: photorealistic-natural

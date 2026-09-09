@@ -1,4 +1,5 @@
 import { sceneKindLabels, type RoadScene } from './road-experience';
+import { foliageForDay } from './regional-foliage';
 
 // Leaflet accepts actual DOM nodes. Do not ship react-dom/server to the browser
 // just to serialize a few icons and popups. All data is assigned as textContent.
@@ -31,9 +32,9 @@ export function carSymbol() {
   symbol.appendChild(svg);return symbol;
 }
 
-export function scenerySymbol(isWindow:boolean, ordinal:number) {
+export function scenerySymbol(isWindow:boolean, ordinal:number, day=2) {
   const symbol=node('span','scenery-symbol');
-  if(isWindow){const leaf=node('img');leaf.src='/autumn-birch-384.webp';leaf.alt='';symbol.appendChild(leaf);}
+  if(isWindow){const leaf=node('img');leaf.src=foliageForDay(day).image;leaf.alt='';symbol.appendChild(leaf);}
   symbol.appendChild(node('b','',isWindow?String(ordinal).padStart(2,'0'):'P'));
   return symbol;
 }

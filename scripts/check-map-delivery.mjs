@@ -18,11 +18,21 @@ for(const feature of data.features){
   }
 }
 const source=readFileSync(new URL('../app/map-canvas.tsx',import.meta.url),'utf8');
-assert.match(source,/\[detailed,setDetailed\]=useState\(false\)/,'No external tiles on initial load');
+assert.match(source,/\[detailed,setDetailed\]=useState\(true\)/,'Detailed roads and place names by default');
+assert.match(source,/detectRetina:true,updateWhenIdle:true/,'High-DPI tiles; avoid requests during continuous panning');
 assert.match(source,/if\(!ready\|\|!detailed\|\|!map.current\|\|!lib.current\)return/);
 assert.match(source,/tiles\.off\(\);tiles\.remove\(\)/,'Detach listeners and tiles when disabled');
 assert.match(source,/clearTimeout\(timer\)/);
 assert(source.includes("setTileStatus('slow')")&&source.includes("setTileStatus('error')"));
 assert(source.includes('Natural Earth')&&source.includes('OpenStreetMap'));
 assert(!source.includes("tiles.on('tileload'"),'An individual successful tile must not clear other failures');
-console.log('PASS: 6 KB local physical context, valid lake/rivers, default no external tiles, detail opt-in, slow/error feedback and cleanup source guards. Not browser QA.');
+const css=readFileSync(new URL('../app/globals.css',import.meta.url),'utf8');
+assert(css.includes('.leaflet-tile-pane { filter:none; opacity:1; }'),'Do not wash out map detail with a decorative filter');
+assert(css.includes('max-width:1480px'),'Bound the map and imagery on ultrawide screens');
+assert(source.includes("color:'#fff',weight:12,opacity:1"));
+assert(source.includes("color:'#164695',weight:9,opacity:1"));
+assert(source.includes("color:'#2163d6',weight:6,opacity:1"));
+assert(source.includes("color:'#8291a5',weight:6"));
+assert(source.includes("pane:'scenic-corridor'")&&source.includes("scenicPane.style.zIndex='350'"),'Scenery must not obscure route strokes');
+assert(source.includes('非实时路况'));
+console.log('PASS: detailed high-DPI map by default, unfiltered labels, valid 6 KB fallback, slow/error feedback and layer cleanup source guards. Not browser QA.');
