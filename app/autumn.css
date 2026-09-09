@@ -1,0 +1,24 @@
+.atlas { position:relative; isolation:isolate; overflow-x:clip; }
+.header-meta { display:flex; align-items:center; gap:23px; }
+.atmosphere-button { height:34px; padding:0 10px; color:#927237; font-size:13px; gap:7px; border-radius:4px; }
+.atmosphere-button:hover,.atmosphere-button[aria-pressed=true] { background:#fff6e6; color:#936426; }
+.atmosphere-button svg { width:16px; height:16px; }
+.autumn-atmosphere { pointer-events:none; position:absolute; inset:0; overflow:clip; z-index:5; --wind-x:0px; --wind-y:0px; }
+.autumn-corner { position:absolute; pointer-events:none; will-change:transform; }
+.autumn-corner img { display:block; width:100%; filter:drop-shadow(2px 7px 8px #ad751726); }
+.autumn-corner-one { width:185px; right:-68px; top:84px; opacity:.52; transform:translate(var(--wind-x),var(--wind-y)) rotate(-42deg); }
+.autumn-corner-two { width:115px; left:-53px; top:194px; opacity:.5; transform:translate(calc(var(--wind-x)*-.65),calc(var(--wind-y)*-.5)) rotate(105deg); filter:blur(.5px); }
+.autumn-corner-three { width:130px; left:-53px; bottom:110px; opacity:.55; transform:translate(calc(var(--wind-x)*.55),calc(var(--wind-y)*.6)) rotate(27deg); }
+.interaction-leaves { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.interaction-leaf { position:absolute; display:block; pointer-events:none; will-change:transform,opacity; filter:drop-shadow(1px 3px 2px #76591a20); }
+.autumn-window { overflow:hidden; }
+.autumn-window img { transition:transform .8s ease; transform-origin:60% 55%; }
+.autumn-window:hover img { transform:scale(1.045); }
+.autumn-window figcaption { position:relative; z-index:1; }
+.chapter { color:#a8652c; }
+.day-tab[data-active] { position:relative; }
+.day-tab[data-active]::before { content:''; width:4px; height:4px; border-radius:50%; background:#c3923b; position:absolute; top:11px; right:6px; }
+@media(max-width:1120px) { .header-meta { gap:12px; } .autumn-atmosphere { inset:0 -22px; } .autumn-corner-one { width:150px; right:-77px; top:86px; } .autumn-corner-two { left:-60px; } }
+@media(max-width:760px) { .header-meta { gap:3px; } .atmosphere-button { padding:0 6px; height:32px; } .atmosphere-button span { display:none; } .autumn-atmosphere { inset:0 -16px; } .autumn-corner-one { width:108px; right:-60px; top:100px; } .autumn-corner-two { width:90px; left:-57px; top:180px; } .autumn-corner-three { display:none; } }
+@media(prefers-reduced-motion:reduce) { .interaction-leaves { display:none; } .autumn-corner { transform:none; } .autumn-window img { transition:none; } }
+@media print { .autumn-atmosphere,.atmosphere-button { display:none; } }
