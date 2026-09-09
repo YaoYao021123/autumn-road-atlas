@@ -1,5 +1,5 @@
-.map-scenery-toggle { position:absolute; left:23px; top:70px; z-index:450; height:32px; padding:0 11px; background:#fff; border:1px solid #dbe1d7; border-radius:4px; color:#775725; font-size:12px; gap:7px; box-shadow:0 2px 8px #2028220a; }
-.map-scenery-toggle:hover,.map-scenery-toggle[aria-pressed=true] { background:#f5f6f3; color:#805814; }
+.map-scenery-toggle { position:absolute; left:23px; top:70px; z-index:450; height:32px; padding:0 11px; background:#fff; border:1px solid #dbe1d7; border-radius:4px; color:#5e705b; font-size:12px; gap:7px; box-shadow:0 2px 8px #2028220a; }
+.map-scenery-toggle:hover,.map-scenery-toggle[aria-pressed=true] { background:#f4f7f5; color:#455a47; }
 .map-scenery-toggle svg { width:14px; height:14px; }
 .map-network-note { top:111px; }
 .scenery-marker { border:0; background:none; }
@@ -11,7 +11,7 @@
 .parking-marker .scenery-symbol::after { content:''; position:absolute; width:1px; height:9px; background:#a9552c; top:100%; left:50%; }
 .parking-marker .scenery-symbol b { margin:0; font:600 15px var(--body-font); }
 .parking-marker.is-selected .scenery-symbol { background:#a9552c; color:#fff; }
-.leaflet-tooltip.scenery-tooltip { font:12px var(--body-font); color:#795123; border:1px solid #dbe1d7; box-shadow:0 2px 6px #20282212; padding:6px 9px; background:#fff; }
+.leaflet-tooltip.scenery-tooltip { font:12px var(--body-font); color:#526650; border:1px solid #dbe1d7; box-shadow:0 2px 6px #20282212; padding:6px 9px; background:#fff; }
 .scenery-popup .leaflet-popup-content-wrapper { border-radius:7px; box-shadow:0 7px 25px #40311d22; }
 .scenery-popup .leaflet-popup-content { margin:18px 20px; }
 .scenery-popup-content { font:13px/1.8 var(--body-font); color:#424439; }

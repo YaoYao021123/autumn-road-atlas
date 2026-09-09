@@ -82,7 +82,7 @@ export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback
     const L=lib.current,layer=L.layerGroup().addTo(map.current);
     const markers=sceneryMarkers.current;markers.clear();
     if(showScenery)scenes.forEach(scene=>{
-      if(scene.highlight.length>1)L.polyline(scene.highlight,{color:'#c99428',weight:8,opacity:.6,lineCap:'round',interactive:false}).addTo(layer);
+      if(scene.highlight.length>1)L.polyline(scene.highlight,{color:'#bb623d',weight:8,opacity:.52,lineCap:'round',interactive:false}).addTo(layer);
       const isWindow=scene.kind==='window';
       const ordinal=scenes.filter(s=>s.day===scene.day).findIndex(s=>s.id===scene.id)+1;
       const icon=L.divIcon({className:`scenery-marker ${isWindow?'window-marker':'parking-marker'}`,html:renderToStaticMarkup(<span className="scenery-symbol">{isWindow?<><img src="/autumn-birch.png" alt=""/><b>{String(ordinal).padStart(2,'0')}</b></>:<b>P</b>}</span>),iconSize:isWindow?[38,43]:[29,29],iconAnchor:isWindow?[19,39]:[14,36],popupAnchor:[0,-33]});
