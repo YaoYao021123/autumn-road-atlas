@@ -1,0 +1,42 @@
+/* A botanical timeline. Bark and leaves are generated image assets, not CSS illustrations. */
+.brand>svg { color:#6f7650; stroke-width:1.35; width:34px; height:34px; }
+.chapter .chapter-leaf { display:flex; align-items:center; gap:7px; color:#a7672f; font:13px Georgia,serif; letter-spacing:1px; }
+.chapter-leaf svg { stroke-width:1.3; }
+.birch-days { margin-top:0; margin-bottom:15px; }
+.birch-days-list { position:relative; padding:8px 0!important; isolation:isolate; }
+.birch-spine { pointer-events:none; position:absolute; z-index:-1; left:4%; right:4%; top:68px; height:44px; background:url('/timeline-birch.png') center/100% 100% no-repeat; opacity:.88; }
+.leaf-day { position:relative; min-height:132px; height:auto!important; padding:8px 10px 10px!important; gap:0!important; align-items:center!important; border:0!important; text-align:center; border-radius:0; background:transparent!important; box-shadow:none!important; }
+.leaf-day+.leaf-day { border-left:0; }
+.leaf-day[data-active] { background:transparent!important; color:var(--leaf-ink,#9a4e22)!important; }
+.leaf-day[data-active]::before { display:none; }
+.leaf-day:after { display:none; }
+.leaf-day .leaf-day-date { display:flex; justify-content:center; align-items:baseline; gap:9px; width:auto; font:17px Georgia,serif; letter-spacing:.04em; }
+.leaf-day-date small { font:11px Georgia,serif; color:#a49d8d; }
+.leaf-day .leaf-day-node { position:relative; display:block; width:52px; height:61px; }
+.leaf-day-node img { width:64px; height:64px; max-width:none; display:block; position:absolute; left:-6px; top:-4px; object-fit:contain; opacity:1; filter:hue-rotate(var(--leaf-hue,0deg)) saturate(var(--leaf-saturation,1)) brightness(var(--leaf-brightness,1)); transform:rotate(-25deg) scale(.9); transform-origin:50% 85%; transition:transform .45s cubic-bezier(.22,.61,.36,1),filter .3s; }
+.leaf-day:nth-of-type(even) .leaf-day-node img { transform:rotate(26deg) scale(.88); }
+.leaf-day-node i { position:absolute; left:24px; bottom:4px; width:4px; height:4px; border-radius:50%; background:#998368; box-shadow:0 0 0 2px #fff; }
+.leaf-day:hover .leaf-day-node img { transform:rotate(-13deg) scale(1.04); }
+.leaf-day:nth-of-type(even):hover .leaf-day-node img { transform:rotate(16deg) scale(.97); }
+.leaf-day[data-active] .leaf-day-node img { filter:hue-rotate(var(--leaf-hue,0deg)) saturate(var(--leaf-saturation,1)) brightness(var(--leaf-brightness,1)) drop-shadow(2px 4px 3px #73521938); transform:rotate(-10deg) scale(1.17); }
+.leaf-day:nth-of-type(even)[data-active] .leaf-day-node img { transform:rotate(12deg) scale(1.17); }
+.leaf-day[data-active] .leaf-day-node i { background:var(--leaf-ink,#ae642b); }
+.leaf-day>strong { font-size:14px!important; line-height:1.55; white-space:normal; font-weight:400; }
+.leaf-day[data-active]>strong { font-weight:600; }
+.botanical-stops li { min-height:64px; gap:11px; }
+.botanical-stops li:not(:last-child)::before { left:13px; top:26px; width:3px; height:calc(100% - 22px); background:#ece9df; border-left:1px solid #9b9788; border-right:1px solid #d4cbb8; }
+.botanical-stops li:not(:last-child)::after { content:''; position:absolute; width:5px; height:17px; top:33px; left:12px; border-top:2px solid #727264; border-bottom:1px solid #727264; transform:rotate(-8deg); opacity:.7; }
+.botanical-stops li>.stop-leaf,.botanical-stops li:first-child>.stop-leaf { width:29px; height:30px; border:0; background:transparent; color:#76511d; border-radius:0; position:relative; isolation:isolate; }
+.stop-leaf img { position:absolute; width:39px; height:39px; max-width:none; left:-5px; top:-5px; opacity:.9; filter:hue-rotate(var(--leaf-hue,0deg)) saturate(var(--leaf-saturation,1)) brightness(var(--leaf-brightness,1)); transform:rotate(27deg); z-index:-1; }
+.stop-leaf b { font:11px Georgia,serif; padding-bottom:1px; }
+.botanical-stops li:first-child .stop-leaf img { opacity:1; filter:hue-rotate(var(--leaf-hue,0deg)) saturate(var(--leaf-saturation,1)) brightness(var(--leaf-brightness,1)) drop-shadow(1px 2px 2px #92692824); }
+.botanical-stops li:nth-child(even) .stop-leaf img { transform:rotate(-24deg); }
+.botanical-stops li>div { padding-top:2px; }
+.botanical-stops li .stop-navigation { margin-top:1px; }
+.workspace { scroll-margin-top:18px; }
+.season-palette-note { margin:1px 0 3px; display:flex; align-items:center; justify-content:flex-end; gap:7px; font-size:12px; line-height:1.7; color:#8b734d; }
+.season-palette-note small { font-size:12px; color:#918f80; margin-left:9px; }
+@media(max-width:760px) { .season-palette-note { justify-content:flex-start; min-width:0; flex-wrap:wrap; gap:3px 7px; padding-bottom:5px; } .season-palette-note small { margin-left:0; } }
+@media(max-width:1120px) { .leaf-day>strong { font-size:13px!important; } .leaf-day { padding-left:6px!important; padding-right:6px!important; } }
+@media(max-width:760px) { .birch-days { position:static; box-shadow:none; overflow-x:auto; margin-top:12px; padding-bottom:5px; } .birch-days-list { min-width:830px; } .leaf-day { min-height:124px; } .leaf-day .leaf-day-date { font-size:16px; } .leaf-day>strong { font-size:13px!important; } .literary-interlude { margin-top:48px; } }
+@media(prefers-reduced-motion:reduce) { .leaf-day-node img { transition:none; } }

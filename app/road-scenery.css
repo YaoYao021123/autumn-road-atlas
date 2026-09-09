@@ -1,0 +1,56 @@
+.map-scenery-toggle { position:absolute; left:23px; top:70px; z-index:450; height:32px; padding:0 11px; background:#fff; border:1px solid #dbe1d7; border-radius:4px; color:#775725; font-size:12px; gap:7px; box-shadow:0 2px 8px #2028220a; }
+.map-scenery-toggle:hover,.map-scenery-toggle[aria-pressed=true] { background:#f5f6f3; color:#805814; }
+.map-scenery-toggle svg { width:14px; height:14px; }
+.map-network-note { top:111px; }
+.scenery-marker { border:0; background:none; }
+.scenery-symbol { display:flex; align-items:center; justify-content:center; width:100%; height:100%; position:relative; color:#754816; }
+.window-marker .scenery-symbol img { width:53px; height:53px; max-width:none; position:absolute; top:-6px; left:-8px; filter:saturate(1.3) hue-rotate(-10deg) drop-shadow(0 2px 2px #71431c44); transform:rotate(15deg); transition:transform .2s ease; }
+.scenery-symbol b { font:600 11px Georgia,serif; position:relative; margin-top:-6px; }
+.window-marker.is-selected .scenery-symbol img { transform:rotate(-8deg) scale(1.2); }
+.parking-marker .scenery-symbol { background:#fff; color:#994923; border:2px solid #a9552c; border-radius:5px; box-shadow:0 2px 6px #68351522; }
+.parking-marker .scenery-symbol::after { content:''; position:absolute; width:1px; height:9px; background:#a9552c; top:100%; left:50%; }
+.parking-marker .scenery-symbol b { margin:0; font:600 15px var(--body-font); }
+.parking-marker.is-selected .scenery-symbol { background:#a9552c; color:#fff; }
+.leaflet-tooltip.scenery-tooltip { font:12px var(--body-font); color:#795123; border:1px solid #dbe1d7; box-shadow:0 2px 6px #20282212; padding:6px 9px; background:#fff; }
+.scenery-popup .leaflet-popup-content-wrapper { border-radius:7px; box-shadow:0 7px 25px #40311d22; }
+.scenery-popup .leaflet-popup-content { margin:18px 20px; }
+.scenery-popup-content { font:13px/1.8 var(--body-font); color:#424439; }
+.scenery-popup-kicker { color:#a2752d; font-size:11px; letter-spacing:.5px; }
+.scenery-popup-content h3 { font:600 20px/1.45 var(--title-font); color:#4f3b27; margin:6px 0 10px; }
+.scenery-popup-content p { margin:8px 0; }
+.scenery-popup-content .scenery-popup-timing { color:#746b59; font-size:12px; }
+.scenery-popup-content .scenery-popup-caution { border-left:2px solid #ccaa65; padding-left:9px; color:#785a36; font-size:12px; }
+.scenery-popup-content small { font-size:11px; color:#877b67; display:block; }
+.leaflet-container .scenery-popup-navigation { display:block; margin-top:12px; color:#9b4e29; text-decoration:underline; text-underline-offset:3px; }
+.scenery-popup-sources { padding-top:11px; margin-top:11px; border-top:1px solid #eee5d5; font-size:11px; color:#8b806f; }
+.leaflet-container .scenery-popup-sources a { display:inline-block; color:#80673e; margin-right:9px; text-underline-offset:3px; }
+.road-scenery { padding:24px 0 20px; border-bottom:1px solid var(--border); }
+.road-scenery-heading { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:16px; }
+.road-scenery-heading .eyebrow { display:flex; align-items:center; gap:7px; color:#a57635; font-size:11px; letter-spacing:1px; }
+.road-scenery-heading h2 { font-size:24px; font-weight:500; margin:8px 0 0; color:#59422c; }
+.road-scenery-heading>p { font-size:12px; line-height:1.8; text-align:right; color:#686b60; margin:0; }
+.road-scenery-heading>p span { color:#8d887b; }
+.road-scene-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); border-top:1px solid #e1e5de; }
+.road-scene-item { padding:16px 22px 12px 0; border-top:2px solid transparent; transition:border-color .2s; }
+.road-scene-item+.road-scene-item { padding-left:25px; border-left:1px solid #e7eae4; }
+.road-scene-item.is-selected { border-top-color:#bb8735; }
+.road-scene-select { display:flex; padding:0; height:auto; width:100%; gap:12px; text-align:left; justify-content:flex-start; border-radius:0; white-space:normal; }
+.road-scene-select:hover { background:transparent; color:#a56822; }
+.road-scene-select>span:nth-child(2) { flex:1; min-width:0; }
+.road-scene-select small { font-size:11px; font-weight:400; color:#968367; display:block; margin-bottom:5px; }
+.road-scene-select strong { font:500 19px/1.5 var(--title-font); display:block; color:#57422b; }
+.road-scene-select>svg { flex:none; color:#a5844b; }
+.road-scene-index { width:32px; height:40px; flex:none; position:relative; display:flex; align-items:center; justify-content:center; color:#956830; }
+.road-scene-index img { width:47px; height:47px; max-width:none; position:absolute; top:-5px; left:-7px; transform:rotate(-12deg); filter:hue-rotate(-9deg) saturate(1.25); }
+.road-scene-index b { position:relative; font:12px Georgia,serif; margin-top:-7px; color:#79521b; }
+.road-scene-index.is-parking { color:#a35d31; }
+.road-scene-item>p { margin:12px 0 7px 44px; color:#62675e; font-size:13px; line-height:1.85; }
+.road-scene-timing { margin-left:44px; display:block; color:#988365; font-size:12px; line-height:1.8; }
+.road-scenery-footnote { display:flex; align-items:flex-start; gap:8px; font-size:11px; line-height:1.9; color:#8a8271; margin:16px 0 0; }
+.road-scenery-footnote svg { flex:none; margin-top:4px; color:#a68042; }
+.road-scenery-footnote strong { font-weight:400; color:#87613e; margin:0 7px; }
+.road-scenery-empty { border-top:1px solid #e1e5de; display:flex; align-items:center; gap:14px; padding:16px 0 2px; color:#9b804b; }
+.road-scenery-empty p { font-size:13px; color:#797765; line-height:1.8; margin:0; }
+@media(max-width:760px) { .map-scenery-toggle { left:12px; top:59px; min-height:36px; height:36px; font-size:12px; } .map-network-note { top:98px; } .road-scenery-heading { align-items:flex-start; } .road-scenery-heading h2 { font-size:22px; } .road-scenery-heading>p { font-size:11px; } .road-scene-list { grid-template-columns:1fr; } .road-scene-item { padding:15px 0; } .road-scene-item+.road-scene-item { padding-left:0; border-left:0; border-top:1px solid #e7eae4; } .road-scene-item.is-selected { box-shadow:inset 0 2px #bb8735; } .road-scene-select strong { font-size:20px; } .road-scene-item>p,.road-scene-timing { margin-left:44px; } }
+@media(prefers-reduced-motion:reduce) { .window-marker .scenery-symbol img,.road-scene-item { transition:none; } }
+@media(max-width:420px) { .road-scenery-heading>p { display:none; } .road-scenery-heading { margin-bottom:12px; } }

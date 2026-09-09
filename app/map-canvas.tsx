@@ -1,4 +1,5 @@
 'use client';
+/* oxlint-disable next/no-img-element -- Leaflet icons are static markup using the existing local PNG; this static site ships no image-optimization server. */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -6,11 +7,14 @@ import { CarFront, MapPinned, Plus, Minus, Maximize2 } from 'lucide-react';
 import type * as Leaflet from 'leaflet';
 import { Button } from '@/components/ui/button';
 import { routeGeometry, routePosition, routeStops, type Segment, type Stop } from './trip';
+import { sceneKindLabels, type RoadScene } from './road-experience';
 
-type Props={legs:Segment[];allLegs:Segment[];progress:number;overview:boolean;dayId:number;fallback:Stop;onOverview:()=>void};
-export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback,onOverview}:Props) {
-  const element=useRef<HTMLDivElement>(null), map=useRef<Leaflet.Map|null>(null),lib=useRef<typeof Leaflet|null>(null);
+type Props={legs:Segment[];allLegs:Segment[];progress:number;overview:boolean;dayId:number;fallback:Stop;onOverview:()=>void;scenes:RoadScene[];showScenery:boolean;selectedSceneId:string|null;sceneSelectionKey:number;onSceneSelect:(id:string)=>void};
+export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback,onOverview,scenes,showScenery,selectedSceneId,sceneSelectionKey,onSceneSelect}:Props) {
+  const element=useRef<HTMLElement>(null), map=useRef<Leaflet.Map|null>(null),lib=useRef<typeof Leaflet|null>(null);
   const group=useRef<Leaflet.LayerGroup|null>(null),car=useRef<Leaflet.Marker|null>(null),trail=useRef<Leaflet.Polyline|null>(null);
+  const sceneryMarkers=useRef(new Map<string,Leaflet.Marker>()),sceneSelect=useRef(onSceneSelect);
+  useEffect(()=>{sceneSelect.current=onSceneSelect;},[onSceneSelect]);
   const [ready,setReady]=useState(false),[tileError,setTileError]=useState(false),[loadError,setLoadError]=useState(false);
   const geometry=useMemo(()=>routeGeometry(legs),[legs]);
   useEffect(()=>{
@@ -71,10 +75,36 @@ export default function MapCanvas({legs,allLegs,progress,overview,dayId,fallback
     if(pos){car.current?.setLatLng(pos.position);trail.current?.setLatLngs([...geometry.points.slice(0,pos.index),pos.position]);}
   },[ready,geometry,progress,overview,dayId,allLegs]);
 
+  useEffect(()=>{
+    if(!ready||!map.current||!lib.current)return;
+    const L=lib.current,layer=L.layerGroup().addTo(map.current);
+    const markers=sceneryMarkers.current;markers.clear();
+    if(showScenery)scenes.forEach(scene=>{
+      if(scene.highlight.length>1)L.polyline(scene.highlight,{color:'#c99428',weight:8,opacity:.6,lineCap:'round',interactive:false}).addTo(layer);
+      const isWindow=scene.kind==='window';
+      const ordinal=scenes.filter(s=>s.day===scene.day).findIndex(s=>s.id===scene.id)+1;
+      const icon=L.divIcon({className:`scenery-marker ${isWindow?'window-marker':'parking-marker'}`,html:renderToStaticMarkup(<span className="scenery-symbol">{isWindow?<><img src="/autumn-birch.png" alt=""/><b>{String(ordinal).padStart(2,'0')}</b></>:<b>P</b>}</span>),iconSize:isWindow?[38,43]:[29,29],iconAnchor:isWindow?[19,39]:[14,36],popupAnchor:[0,-33]});
+      const marker=L.marker(scene.position,{icon,zIndexOffset:650,keyboard:true,title:`D${scene.day} · ${scene.title} · ${sceneKindLabels[scene.kind]}`,alt:`${scene.title}，${sceneKindLabels[scene.kind]}`}).addTo(layer);
+      const label=document.createElement('span');label.textContent=scene.title;
+      marker.bindTooltip(label,{direction:'top',offset:[0,-35],className:'scenery-tooltip'});
+      marker.bindPopup(renderToStaticMarkup(<article className="scenery-popup-content"><span className="scenery-popup-kicker">D{String(scene.day).padStart(2,'0')} · {sceneKindLabels[scene.kind]}</span><h3>{scene.title}</h3><p>{scene.description}</p><p className="scenery-popup-timing">{scene.timing}</p><p className="scenery-popup-caution">{scene.caution}</p>{isWindow&&<small>位置及金色短线为景观路段示意，不是停车点。</small>}{scene.navigationHref&&<a className="scenery-popup-navigation" href={scene.navigationHref} target="_blank" rel="noopener noreferrer">打开前一站至停车入口的百度导航 ↗</a>}<div className="scenery-popup-sources">地理依据：{scene.sources.map(source=><a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>)}</div></article>),{className:'scenery-popup',maxWidth:290,minWidth:210,maxHeight:220,autoPanPaddingTopLeft:L.point(24,60),autoPanPaddingBottomRight:L.point(24,125)});
+      marker.on('click',()=>sceneSelect.current(scene.id));
+      markers.set(scene.id,marker);
+    });
+    return()=>{layer.remove();markers.clear();};
+  },[ready,scenes,showScenery]);
+
+  useEffect(()=>{
+    sceneryMarkers.current.forEach((marker,id)=>marker.getElement()?.classList.toggle('is-selected',id===selectedSceneId));
+    if(!showScenery||!selectedSceneId)return;
+    const marker=sceneryMarkers.current.get(selectedSceneId);
+    if(marker)marker.openPopup();
+  },[ready,scenes,selectedSceneId,sceneSelectionKey,showScenery]);
+
   return <>
-    <div ref={element} className="map-canvas" role="region" aria-label="可缩放拖动的道路地图；下方日期切换路段"/>
+    <section ref={element} className="map-canvas" aria-label="可缩放拖动的道路地图；上方日期切换路段，叶标查看沿途美景，P 标为停车入口"/>
     {!ready&&<div className="map-loading"><MapPinned size={28}/><span>{loadError?'地图暂时未加载，可使用左侧百度导航':'正在载入道路地图'}</span></div>}
-    {tileError&&<div className="map-network-note" role="status">底图连接不稳定；道路轨迹与分段导航仍可使用。</div>}
+    {tileError&&<output className="map-network-note">底图连接不稳定；道路轨迹与分段导航仍可使用。</output>}
     <div className="map-tools"><Button variant="outline" size="icon" title="放大地图" aria-label="放大地图" onClick={()=>map.current?.zoomIn()}><Plus/></Button><Button variant="outline" size="icon" title="缩小地图" aria-label="缩小地图" onClick={()=>map.current?.zoomOut()}><Minus/></Button><Button variant="outline" size="icon" title={overview?'聚焦当天':'查看全程'} aria-label={overview?'聚焦当天':'查看全程'} onClick={onOverview}><Maximize2/></Button></div>
   </>;
 }

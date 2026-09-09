@@ -1,7 +1,7 @@
 .atlas { position:relative; isolation:isolate; overflow-x:clip; }
 .header-meta { display:flex; align-items:center; gap:23px; }
 .atmosphere-button { height:34px; padding:0 10px; color:#927237; font-size:13px; gap:7px; border-radius:4px; }
-.atmosphere-button:hover,.atmosphere-button[aria-pressed=true] { background:#fff6e6; color:#936426; }
+.atmosphere-button:hover,.atmosphere-button[aria-pressed=true] { background:#f5f6f3; color:#936426; }
 .atmosphere-button svg { width:16px; height:16px; }
 .autumn-atmosphere { pointer-events:none; position:absolute; inset:0; overflow:clip; z-index:5; --wind-x:0px; --wind-y:0px; }
 .autumn-corner { position:absolute; pointer-events:none; will-change:transform; }

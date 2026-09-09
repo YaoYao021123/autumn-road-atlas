@@ -1,0 +1,75 @@
+[
+  {
+    "day": 1,
+    "image": "https://www.news.cn/20250706/951aba1fb28f4e3f9932d6de2c5c4a16/UXJ934mkJpgIwN5p.jpg",
+    "title": "齐齐哈尔 · 抵达鹤城",
+    "alt": "齐齐哈尔城市航拍，2025年7月发布的夏季历史照片，代表第一天目的地，不是当日沿途实况",
+    "source": "https://www.news.cn/20250706/951aba1fb28f4e3f9932d6de2c5c4a16/c.html",
+    "dateLabel": "2025.07 发布 · 夏季城市参考",
+    "credit": "新华网；中共齐齐哈尔市委宣传部供图；具体拍摄日未披露",
+    "position": "center 55%"
+  },
+  {
+    "day": 2,
+    "image": "https://www.news.cn/photo/20250730/2be19939dd0945f582ef52a79218b2e8/202507302be19939dd0945f582ef52a79218b2e8_20250730f349fb61101a46f7bdb9c07c69543dd0.jpg",
+    "title": "海拉尔 · 河流与草原",
+    "alt": "海拉尔河与周围草原，2025年7月29日拍摄的夏季历史照片，代表第二天目的地区域",
+    "source": "https://www.news.cn/photo/20250730/2be19939dd0945f582ef52a79218b2e8/c.html?page=4",
+    "dateLabel": "2025.07 摄 · 夏季景观参考",
+    "credit": "新华社记者贾立君摄，2025-07-29",
+    "position": "center 55%"
+  },
+  {
+    "day": 3,
+    "image": "https://www.news.cn/photo/20250917/f2b42b6142b34babb56b169dce6f1ee9/20250917f2b42b6142b34babb56b169dce6f1ee9_20250917e57832d9c26b4bdeb32e7237406bf232.jpg",
+    "title": "额尔古纳 · 湿地之秋",
+    "alt": "额尔古纳湿地的河流与秋色，新华社2025年9月16日历史照片，不代表今年叶色或景区入园安排",
+    "source": "https://www.news.cn/photo/20250917/f2b42b6142b34babb56b169dce6f1ee9/c.html?page=2",
+    "dateLabel": "2025.09 摄 · 秋景参考",
+    "credit": "新华社记者马金瑞摄，2025-09-16",
+    "position": "center"
+  },
+  {
+    "day": 4,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c2/%E6%96%B0%E5%B7%B4%E5%B0%94%E8%99%8E%E5%8F%B3%E6%97%97_%E8%8D%89%E5%8E%9F_-_panoramio.jpg",
+    "title": "新巴尔虎右旗 · 草原腹地",
+    "alt": "新巴尔虎右旗草原，mayanming于2012年8月拍摄的夏季历史照片，区域代表而非本次G331具体路段实况",
+    "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E5%B7%B4%E5%B0%94%E8%99%8E%E5%8F%B3%E6%97%97_%E8%8D%89%E5%8E%9F_-_panoramio.jpg",
+    "dateLabel": "2012.08 摄 · 夏季草原参考",
+    "credit": "mayanming / Wikimedia Commons；页面仅作显示裁切",
+    "author": "mayanming",
+    "licenseLabel": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "position": "center 55%"
+  },
+  {
+    "day": 5,
+    "image": "https://xczx.news.cn/2023-10/13/1212288386_16971850126181n.jpg",
+    "title": "阿尔山 · 秋色长廊",
+    "alt": "车辆穿过阿尔山金黄秋林公路，2023年历史景观参考，不能据此判断景区内是否可自驾",
+    "source": "https://xczx.news.cn/2023-10/13/c_1212288386.htm",
+    "dateLabel": "2023.10 发布 · 秋景参考",
+    "credit": "新华网 / 兴安日报，2023-10-13；原图注：驾车穿越阿尔山秋色长廊",
+    "position": "center 62%"
+  },
+  {
+    "day": 6,
+    "image": "https://xczx.news.cn/2023-10/25/1212293743_16982241179921n.jpg",
+    "title": "阿尔山市区 · 南返起点",
+    "alt": "阿尔山市市区秋景，2023年10月发布的历史图片，作为第六天返程出发地参考；不表示长春西站路线经过松原",
+    "source": "https://xczx.news.cn/2023-10/25/c_1212293743.htm",
+    "dateLabel": "2023.10 发布 · 城市秋景参考",
+    "credit": "新华网 / 兴安日报；记者毕力格；具体拍摄日未披露",
+    "position": "center 55%"
+  },
+  {
+    "day": 7,
+    "image": "https://www.news.cn/photo/2023-10/25/1129937308_16982181635331n.JPG",
+    "title": "长春 · 把秋天带回城里",
+    "alt": "长春新民广场周边秋日城市道路，2023年10月24日历史照片；仅为还车城市参考，不是具体租车门店",
+    "source": "https://www.news.cn/photo/2023-10/25/c_1129937308_9.htm",
+    "dateLabel": "2023.10 摄 · 城市秋景参考",
+    "credit": "新华社记者颜麟蕴摄，2023-10-24",
+    "position": "center"
+  }
+]
