@@ -1,13 +1,14 @@
 [
   {
     "day": 1,
-    "image": "https://www.news.cn/20250706/951aba1fb28f4e3f9932d6de2c5c4a16/UXJ934mkJpgIwN5p.jpg",
-    "title": "齐齐哈尔 · 抵达鹤城",
-    "alt": "齐齐哈尔城市航拍，2025年7月发布的夏季历史照片，代表第一天目的地，不是当日沿途实况",
-    "source": "https://www.news.cn/20250706/951aba1fb28f4e3f9932d6de2c5c4a16/c.html",
-    "dateLabel": "2025.07 发布 · 夏季城市参考",
-    "credit": "新华网；中共齐齐哈尔市委宣传部供图；具体拍摄日未披露",
-    "position": "center 55%"
+    "image": "/day01-qiqihar-bbq-v1.webp",
+    "sourceImage": "https://media.bjnews.com.cn/fz/html/AttachPubDev/2023/4/anf20234271042181114607.jpg",
+    "title": "齐齐哈尔 · 第一晚，吃烤肉",
+    "alt": "齐齐哈尔烤肉报道中的烤盘与牛肉近景，2023年历史配图；作为首日晚餐氛围参考，不代表已选定餐厅",
+    "source": "https://m.bjnews.com.cn/detail/1682563340168202.html",
+    "dateLabel": "2023.04 报道配图 · 非餐厅推荐",
+    "credit": "新京报，2023-04-27；受访者供图，个人摄影师未披露；缩小转为 WebP，页面显示裁切；未发现开放许可",
+    "position": "center 67%"
   },
   {
     "day": 2,

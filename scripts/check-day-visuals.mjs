@@ -9,13 +9,13 @@ assert.equal(new Set(scenes.map(s=>s.image)).size,7,'Each day must have a distin
 for(let i=0;i<7;i++){
   const scene=scenes[i];
   assert.equal(scene.day,i+1);
-  if(scene.day===4){
-    assert.equal(scene.image,'/day04-grassland-v1.webp');
+  if(scene.day===1||scene.day===4){
+    assert.equal(scene.image,scene.day===1?'/day01-qiqihar-bbq-v1.webp':'/day04-grassland-v1.webp');
     assert.equal(new URL(scene.sourceImage).protocol,'https:');
     const optimized=await readFile(new URL(`public${scene.image}`,root));
     assert.equal(optimized.toString('ascii',8,12),'WEBP');
-    assert(optimized.length<50000);
-    assert.match(scene.credit,/缩小.*WebP.*CC BY-SA/);
+    assert(optimized.length<(scene.day===1?120000:50000));
+    assert.match(scene.credit,scene.day===1?/新京报.*受访者供图.*WebP/:/缩小.*WebP.*CC BY-SA/);
   }else assert.equal(new URL(scene.image).protocol,'https:');
   assert.equal(new URL(scene.source).protocol,'https:');
   for(const field of ['title','alt','credit','dateLabel'])assert.ok(scene[field]);

@@ -1,6 +1,6 @@
 .daily-window { background:#fff; }
 .daily-image-surface { position:relative; height:182px; overflow:hidden; }
-.daily-window .daily-image-surface>img { width:100%; height:100%; display:block; object-fit:cover; opacity:0; transform:scale(1.025); transition:opacity .4s ease,transform .85s ease; }
+.daily-window .daily-image-surface>img { width:100%; height:100%; display:block; object-fit:cover; opacity:1; transform:scale(1.025); transition:transform .85s ease; }
 .daily-window[data-ready=true] .daily-image-surface>img { opacity:1; transform:scale(1); }
 .daily-window[data-ready=true]:hover .daily-image-surface>img { transform:scale(1.045); }
 .daily-window figcaption { padding:11px 14px; align-items:center; background:#fff; border-top:1px solid #e1e5de; }

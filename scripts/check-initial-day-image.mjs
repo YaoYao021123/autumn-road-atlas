@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import vm from 'node:vm';
+import ts from 'typescript';
+const require=createRequire(import.meta.url);
+const read=file=>readFileSync(new URL(`../${file}`,import.meta.url),'utf8');
+const code=ts.transpileModule(read('app/day-landscape.tsx'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText;
+const scene=JSON.parse(read('app/day-scenes.json'))[0];
+function mount(image){
+  const state=[],effects=[];let cursor=0;
+  const hooks={useState:initial=>{const i=cursor++;state[i]=initial;return [initial,value=>{state[i]=value;}];},useRef:()=>({current:image}),useEffect:fn=>effects.push(fn)};
+  const module={exports:{}};
+  vm.runInNewContext(code,{module,exports:module.exports,require:name=>name==='react'?hooks:name.endsWith('.css')?{}:require(name)});
+  const tree=module.exports.DayLandscape({scene});
+  effects.forEach(effect=>effect());
+  const img=tree.props.children[0].props.children;
+  return {state,img};
+}
+assert.deepEqual(mount({complete:true,naturalWidth:800}).state,[false,true],'Cached image completes before hydration');
+assert.deepEqual(mount({complete:true,naturalWidth:0}).state,[true,false],'Pre-hydration failure shows fallback');
+const cold=mount({complete:false,naturalWidth:0});
+assert.deepEqual(cold.state,[false,false]);
+cold.img.props.onLoad();assert.deepEqual(cold.state,[false,true]);
+const failed=mount({complete:false,naturalWidth:0});failed.img.props.onError();assert.deepEqual(failed.state,[true,false]);
+assert.deepEqual(mount({complete:false,naturalWidth:0}).state,[false,false],'A new keyed day does not inherit failure');
+assert.equal(cold.img.props.loading,'eager');
+assert.equal(cold.img.props.fetchPriority,'high');
+assert.ok(!/opacity\s*:\s*0(?:[;\s}]|$)/.test(read('app/day-landscape.css')),'Visibility must not depend on hydration/load events');
+assert.equal(scene.image,'/day01-qiqihar-bbq-v1.webp');
+assert.match(scene.title,/烤肉/);
+const asset=readFileSync(new URL(`../public${scene.image}`,import.meta.url));
+assert.equal(asset.toString('ascii',8,12),'WEBP');assert.ok(asset.length<120000);
+console.log(`PASS: cached/cold/failed image lifecycle; keyed remount isolation; SSR-visible CSS; eager first image; local barbecue ${asset.length} bytes. Component model test, not browser QA.`);

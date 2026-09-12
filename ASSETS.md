@@ -1,5 +1,10 @@
 # Asset provenance
 
+## D1 barbecue and initial-image fix — 2026-09-13
+
+- Replaced the D1 city aerial with `public/day01-qiqihar-bbq-v1.webp`, a contextual thumbnail from [新京报, 2023-04-27](https://m.bjnews.com.cn/detail/1682563340168202.html). [Original image](https://media.bjnews.com.cn/fz/html/AttachPubDev/2023/4/anf20234271042181114607.jpg): 1280 × 1706, credited “受访者供图”; no individual photographer or open licence identified. Inspected the source; resized to 800 px wide and encoded WebP, without retouching; CSS displays the lower grill detail. This is an attributed historical food reference, not a restaurant endorsement, booking, or 2026 photograph. Copyright remains with its owner; no free-reuse licence is claimed. Earlier D1 provenance below is historical and superseded.
+- The image is served with the site rather than relying on a third-party request on the first screen. CSS no longer hides the image pending React's `load` event. An effect reconciles already-complete success/error states after hydration; later load/error handlers and per-day keys remain in place.
+
 ## Cultural reading landscape — 2026-09-09
 
 The former three-tab book gallery is now an unboxed editorial sequence. Work metadata, geography boundaries and evidence URLs live in `app/cultural-works.json`. Only the existing short novel excerpt is quoted; connective prose is original. The original three generated scene files remain intact, but only the river and forest appear in the new composition. CSS masks are presentation effects, not new photographs or edits to the source assets.
