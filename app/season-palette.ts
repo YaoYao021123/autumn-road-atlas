@@ -5,7 +5,7 @@ export const seasonPalette: Record<number,{label:string;hue:number;saturation:nu
   3:{label:'河谷金黄',hue:-2,saturation:1.23,brightness:1,ink:'#a5721c'},
   4:{label:'林草暖金',hue:-12,saturation:1.28,brightness:.99,ink:'#a86723'},
   5:{label:'秋林琥珀',hue:-23,saturation:1.32,brightness:.95,ink:'#a25026'},
-  6:{label:'山地赭金渐回平原',hue:-7,saturation:1.16,brightness:1.02,ink:'#a37725'},
+  6:{label:'南返平原金黄',hue:-7,saturation:1.16,brightness:1.02,ink:'#a37725'},
   7:{label:'城中浅金',hue:6,saturation:1.08,brightness:1.04,ink:'#9a7a2c'},
 };
 export function leafVariables(day:number){

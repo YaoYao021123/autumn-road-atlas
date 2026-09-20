@@ -53,7 +53,7 @@ for(const segment of Object.values(trip.segments))for(const platform of ['ios','
 // Render the actual links for both platforms, without launching external apps.
 for(const platform of ['desktop','ios','android']){
   const {RouteNavigation}=loader({react:{...React,useSyncExternalStore:()=>platform}})(resolve(root,'app/route-navigation.tsx'));
-  const legs=trip.getDays('airport',false)[3].legs.map(id=>trip.segments[id]);
+  const legs=trip.getDays()[3].legs.map(id=>trip.segments[id]);
   const html=renderToStaticMarkup(React.createElement(RouteNavigation,{legs}));
   assert.equal((html.match(/class="navigation-leg"/g)||[]).length,3);
   assert.equal((html.match(/class="navigation-provider"/g)||[]).length,6);
@@ -95,4 +95,4 @@ events.get('click')({target:new Node(null,'constructor'),detail:1,clientX:1000,c
 cleanup();assert.equal(events.size,0);assert(pool.every(leaf=>leaf.dataset.active==='false'));
 const literary=readFileSync(resolve(root,'app/literary-interlude.tsx'),'utf8');
 for(const [id,kind] of [['river','birch'],['grassland','grass'],['cinema','grass'],['homecoming','poplar']])assert(new RegExp(`id="culture-${id}"[^>]+data-foliage="${kind}"`).test(literary));
-console.log('PASS: 17 route links × 3 platforms; BD09/GCJ02 conversion; actual mobile/desktop markup; chapter click/scroll foliage; wide-screen bounds; controls excluded; cleanup.');
+console.log(`PASS: ${Object.keys(trip.segments).length} route links × 3 platforms; BD09/GCJ02 conversion; actual mobile/desktop markup; chapter click/scroll foliage; wide-screen bounds; controls excluded; cleanup.`);

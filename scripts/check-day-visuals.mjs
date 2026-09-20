@@ -16,12 +16,12 @@ for(let i=0;i<7;i++){
     assert.equal(optimized.toString('ascii',8,12),'WEBP');
     assert(optimized.length<(scene.day===1?120000:50000));
     assert.match(scene.credit,scene.day===1?/新京报.*受访者供图.*WebP/:/缩小.*WebP.*CC BY-SA/);
-  }else assert.equal(new URL(scene.image).protocol,'https:');
+  }else if(scene.day===6){assert.equal(scene.image,'/day06-radisson-red.jpg');assert((await readFile(new URL('public'+scene.image,root))).length<100000);}else assert.equal(new URL(scene.image).protocol,'https:');
   assert.equal(new URL(scene.source).protocol,'https:');
   for(const field of ['title','alt','credit','dateLabel'])assert.ok(scene[field]);
   assert.match(scene.alt,/历史/);
 }
-assert.match(scenes[5].title,/阿尔山/,'Return day represents its departure, not an unconfirmed Songyuan waypoint');
+assert.match(scenes[5].title,/丽芮/,'D6 image matches confirmed hotel destination');
 assert.ok(scenes[3].licenseUrl&&scenes[3].author);
 const source=await readFile(new URL('app/season-palette.ts',root),'utf8');
 const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;

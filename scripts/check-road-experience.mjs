@@ -56,15 +56,14 @@ for (const definition of definitions) {
 }
 
 let maxSnapKm = 0;
-const variantReport = [];
-for (const endpoint of ['airport', 'west']) for (const overnight of [false, true]) {
-  const days = trip.getDays(endpoint, overnight);
+{
+  const days = trip.getDays();
   const scenes = api.getRoadScenes(days);
-  assert.equal(scenes.length, 8, `${endpoint}/${overnight}: a scene is missing or exceeds the 5 km route threshold`);
+  assert.equal(scenes.length, 8, 'Hotel itinerary: a scene is missing or exceeds the 5 km route threshold');
   const d6 = scenes.find((scene) => scene.id === 'g302-return-grassland');
-  const expectedLeg = overnight ? 'arxan_songyuan' : endpoint === 'airport' ? 'arxan_longjia' : 'arxan_changchun_west';
+  const expectedLeg = 'park_ji';
+  assert.equal(d6.day,5);
   assert.equal(d6.legId, expectedLeg);
-  variantReport.push(`${endpoint}/${overnight ? '松原' : '直返'} → ${d6.legId}`);
   for (const scene of scenes) {
     const day = days.find((candidate) => candidate.id === scene.day);
     assert(day.legs.includes(scene.legId));
@@ -105,18 +104,17 @@ for (const endpoint of ['airport', 'west']) for (const overnight of [false, true
   const parking = scenes.find((scene) => scene.kind === 'parking');
   const transfer = scenes.find((scene) => scene.kind === 'transfer');
   assert.equal(parking.legId, 'heishantou_186_parking');
-  assert.equal(transfer.legId, 'iershi_park_parking');
+  assert.equal(transfer.legId, 'linyuan_park');
   assert.notEqual(parking.navigationHref, transfer.navigationHref);
 }
 
 assert.equal(api.getRoadScenes([]).length, 0);
-assert.equal(api.getRoadScenes(trip.getDays('airport', false).filter((day) => day.id === 5)).length, 2);
+assert.equal(api.getRoadScenes(trip.getDays().filter((day) => day.id === 5)).length, 3);
 const offRoute = structuredClone(definitions);
 offRoute[0].position = [0, 0];
 const guarded = load(sceneSource, { './road-scenes.json': offRoute, './trip': trip });
-assert.equal(guarded.getRoadScenes(trip.getDays('airport', false)).some((scene) => scene.id === offRoute[0].id), false,
+assert.equal(guarded.getRoadScenes(trip.getDays()).some((scene) => scene.id === offRoute[0].id), false,
   'An off-route point over 5 km away must be omitted, not fabricated on another road');
 assert.equal(JSON.stringify({ data, definitions }), original, 'Pure lookup must not mutate source data or routes');
-console.log(`PASS: 8 scenes, four route combinations, six non-navigable window markers, exact parking/transfer anchors, contiguous highlights ≤5 km each way; maximum source-to-route snap ${(maxSnapKm * 1000).toFixed(1)} m.`);
-for (const variant of variantReport) console.log(`  ${variant}`);
+console.log(`PASS: 8 scenes on the confirmed hotel itinerary, six non-navigable window markers, exact parking/transfer anchors, contiguous highlights ≤5 km each way; maximum source-to-route snap ${(maxSnapKm * 1000).toFixed(1)} m.`);
 console.log('PASS: off-route >5 km guard; empty/subset days; source provenance; no runtime gcoord dependency; no input mutation.');

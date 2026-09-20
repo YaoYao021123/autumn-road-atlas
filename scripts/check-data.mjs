@@ -7,7 +7,7 @@ import { encodeRoute, decodeRoute } from '../app/route-codec.ts';
 const data=JSON.parse(await readFile(new URL('../app/routes.generated.json',import.meta.url),'utf8'));
 const compactText=await readFile(new URL('../app/routes.compact.json',import.meta.url),'utf8');
 const compact=JSON.parse(compactText);
-assert(Buffer.byteLength(compactText)<140000,'Compact route payload budget');
+assert(Buffer.byteLength(compactText)<230000,'Compact route payload budget');
 for(const [id,segment] of Object.entries(data.segments)){
   assert.deepEqual(decodeRoute(compact.segments[id].path),segment.points,`${id}: preserve every coordinate`);
   const {path,...metadata}=compact.segments[id];
@@ -23,7 +23,7 @@ const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.Comm
 const result={exports:{}};
 vm.runInNewContext(code,{exports:result.exports,module:result,URLSearchParams,require:(name)=>{if(name==='./route-codec')return {decodeRoute};assert.equal(name,'./routes.compact.json');return compact;}});
 const api=result.exports;
-assert.equal(Object.keys(api.segments).length,17);
+assert.equal(Object.keys(api.segments).length,29);
 assert.equal(api.segments.park_city,undefined,'Misresolved hot-spring snapshot must stay excluded');
 for(const segment of Object.values(api.segments)) {
   assert(segment.points.length>=2);
@@ -40,16 +40,14 @@ for(const segment of Object.values(api.segments)) {
   assert(Math.hypot(start.position[0]-segment.points[0][0],start.position[1]-segment.points[0][1])<1e-8);
   assert(Math.hypot(end.position[0]-segment.points.at(-1)[0],end.position[1]-segment.points.at(-1)[1])<1e-8);
 }
-for(const endpoint of ['airport','west'])for(const overnight of [false,true]) {
-  const days=api.getDays(endpoint,overnight);
-  assert.equal(days.length,7);
-  for(const day of days)for(const leg of day.legs)assert(api.segments[leg]);
-  assert.equal(days[6].legs.length,overnight?1:0);
-  assert.equal(days[5].legs[0],overnight?'arxan_songyuan':endpoint==='airport'?'arxan_longjia':'arxan_changchun_west');
-  const d4=days[3].legs.reduce((sum,id)=>sum+api.segments[id].km,0);
-  assert(Math.abs(d4-426.285)<0.001);
-  assert(days[3].legs.includes('right_left_banner'));
-  assert.equal(days[4].legs[1],'park_parking_city');
-}
+const days=api.getDays();
+assert.equal(days.length,7);
+for(const day of days){for(const id of day.legs)assert(api.segments[id]);assert.equal(day.stops.length,day.legs.length+1);}
+for(let i=0;i<6;i++){const end=api.segments[days[i].legs.at(-1)].destination,start=api.segments[days[i+1].legs[0]].origin;assert.deepEqual(end.bd09,start.bd09,'Overnight hotel must equal following morning origin');}
+assert.equal(days[0].legs[0],'meilun_wanda');
+assert.equal(days[4].legs[1],'park_ji');
+assert.equal(days[5].legs[0],'ji_red');
+assert.equal(days[6].legs[0],'red_airport');
+assert(days[3].legs.includes('right_left_banner'));
 assert.equal(api.routePosition(api.routeGeometry([]),0),null);
-console.log('PASS: 17 segments; four route variants; BD09 navigation links; coordinate bounds; animation endpoints; park-origin correction.');
+console.log('PASS: 29 segments; seven hotel-linked days; BD09 navigation links; coordinate bounds; animation endpoints; park-origin correction.');

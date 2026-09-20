@@ -196,6 +196,10 @@ Larch:
 Primary request: one short Greater Khingan larch-inspired autumn twig, with warm golden thin needle leaves growing in distinct radiating tufts along a slim brown short branch. A compact, unmistakable needle-leaf twig, multiple golden needle clusters with airy space between them, organically varied lengths and gentle curves, enough grouped mass to read at 50–70 px. Needles radiate like small soft starbursts from short shoots along the twig. No broad leaves, no cones, no pinecone, no evergreen green bough. Original landscape-inspired larch imagery.
 ```
 
+## D06 confirmed-hotel photograph — 2026-09-20
+
+`public/day06-radisson-red.jpg` is a display photograph of 长春净月丽芮酒店 Radisson RED, replacing the Arxan image after the itinerary changed to 乌兰浩特 → 长春 on October 2. Source: [Ctrip hotel page](https://m.ctrip.com/webapp/hotels/detail?hotelid=132240816); [image](https://dimg04.c-ctrip.com/images/1mc6112000q2unga2C0E7_W_1280_853_R5_Q70.jpg). Downloaded September 20, 2026, unmodified JPEG, 82,283 bytes. Photographer and capture date are not supplied; this is a hotel display/reference image, not a current-condition photograph or an openly licensed asset. Source attribution remains visible in the day panel.
+
 ## Final leaf generation prompt
 
 Use case: photorealistic-natural

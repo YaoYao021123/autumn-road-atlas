@@ -3,7 +3,6 @@ import './driving-effort.css';
 
 type DrivingEffortProps = {
   dayId: number;
-  overnight: boolean;
   minutes: number;
 };
 
@@ -28,7 +27,7 @@ const dailyAssessments: Record<number, EffortAssessment> = {
     burden: '中高 · 持续驾驶',
     context: '连续高速更能发挥操作减负作用，但长时间观察路况和车辆行为仍需保持注意力。',
     supervision: '留意大车、并线和施工。长直路容易困倦，不能把系统稳定运行当作放松警觉的理由。',
-    rest: '提前选好服务区，约每 1.5–2 小时休息约 20 分钟。若有两名熟悉车辆的驾驶员，可轮换。',
+    rest: '提前选好服务区，约每 1.5–2 小时休息约 20 分钟。由已获租车授权且熟悉车辆的司机轮换。',
   },
   3: {
     relief: '有限 · 国道与短高速',
@@ -45,52 +44,28 @@ const dailyAssessments: Record<number, EffortAssessment> = {
     rest: '提前安排旗县补给和正规停车点，约每 1.5–2 小时休息。保留白天行驶时间，不追赶日落。',
   },
   5: {
-    relief: '较少 · 外部接驳',
-    burden: '驾驶低 · 体力中高',
-    context: '驾驶基线只含景区外接驳；全天步行、换乘和排队另计，不能当作司机的完整休息日。',
+    relief: '有限 · 进山与南返',
+    burden: '高 · 游园后长途驾驶',
+    context: '林苑到公园停车场，再到乌兰浩特全季，外部驾驶约 5 小时；游园、换乘、排队和休息另计。不能视为轻松休息日。',
     supervision: '景区入口、停车场及出园接驳自行观察和操控，不把车辆回放理解为核心景区内可自驾。',
-    rest: '午间安排坐下休息，控制最后一个景点的时间；出园前确认司机状态，为次日返程留足睡眠。',
+    rest: '争取 13:00–14:00 回停车场出发。出园前坐下休息并确认司机状态，南下仍约 4 小时 20 分钟；若延误或困倦，缩减游览、调整住宿，不因已订酒店硬赶。',
   },
 };
 
-function assessmentFor(dayId: number, overnight: boolean): EffortAssessment {
-  if (dayId === 6) {
-    return overnight
-      ? {
-          relief: '出山后高速段较明显',
-          burden: '高 · 松原仍是长途',
-          context: '住松原分散了两天的驾驶时长，但今天出山与高速仍占据较长时间。',
-          supervision: '白天主动驾驶出山；高速可用路段也须全程监督，重点留意匝道、施工和车流变化。',
-          rest: '提前确认松原住宿，约每 1.5–2 小时休息约 20 分钟。两名熟悉车辆的司机可轮换，勿等疲劳才决定停留。',
-        }
-      : {
-          relief: '出山后高速段较明显',
-          burden: '全程最高 · 全天返程',
-          context: '约 8 小时以上的驾驶基线，还要增加休息、用餐和拥堵；高速操作减负不改变这一天的最高负担。',
-          supervision: '出山段主动驾驶，高速段持续观察和准备接管。不可因开启 NOA 而延长连续驾驶时间。',
-          rest: '优先两名熟悉车辆的司机轮换，或提前选定松原住宿。约每 1.5–2 小时休息；困倦时就近安全停靠，不为当晚抵达硬撑。',
-        };
-  }
-
-  if (dayId === 7) {
-    return overnight
-      ? {
-          relief: '高速段较明显',
-          burden: '中 · 另有还车时限',
-          context: '松原至长春仍是一段跨城驾驶；导航终点尚非已确认的还车门店。',
-          supervision: '清晨确认精神状态，高速持续监督，进城和门店接驳主动驾驶。',
-          rest: '按实际门店提前出发，途中预留休息和拥堵时间；以 10:00 到店为目标，另留验车、补能及行李整理时间。',
-        }
-      : {
-          relief: '较少 · 市内短接驳',
-          burden: '低 · 门店接驳',
-          context: '已在长春住宿时，不再安排跨城长途；实际接驳时长待门店确定。',
-          supervision: '关注城市路口、行人和停车场，短接驳以主动驾驶为主。',
-          rest: '正常休息后出发，以 10:00 到店为目标；油电、验车和行李整理另留时间，11:00 前完成还车。',
-        };
-  }
-
-  return dailyAssessments[dayId] ?? dailyAssessments[1];
+function assessmentFor(dayId:number):EffortAssessment {
+  if(dayId===6)return {
+    relief:'较明显 · 高速段',burden:'中高 · 酒店间转场',
+    context:'从乌兰浩特全季到长春净月丽芮，驾驶基线约 4 小时 45 分钟；比原阿尔山直返方案短，但仍需休息和拥堵余量。',
+    supervision:'高速辅助驾驶须持续监督；留意匝道、施工和进城混合交通。',
+    rest:'约每 1.5–2 小时在正式服务区休息，由已获授权、状态良好的司机轮换。暂留 6–7 小时，不把节省的时间全部加成景点。'
+  };
+  if(dayId===7)return {
+    relief:'有限 · 机场接驳',burden:'低 · 有还车时限',
+    context:'从净月丽芮到龙嘉 T2 代表点约 42 km，实际门店入口仍待确认。',
+    supervision:'关注城市路口、机场分岔与停车场入口，全程观察并准备接管。',
+    rest:'暂按 08:30 离店、10:00 到实际门店、11:00 前交车；油电补给和验车另计。'
+  };
+  return dailyAssessments[dayId]??dailyAssessments[1];
 }
 
 function durationText(minutes: number) {
@@ -102,22 +77,22 @@ function durationText(minutes: number) {
 }
 
 /** Route-planning judgement, not a measured fatigue score or a vehicle entitlement check. */
-export function DrivingEffort({ dayId, overnight, minutes }: DrivingEffortProps) {
-  const assessment = assessmentFor(dayId, overnight);
-  const highestBurden = dayId === 6 && !overnight;
+export function DrivingEffort({ dayId, minutes }: DrivingEffortProps) {
+  const assessment = assessmentFor(dayId);
+  const highestBurden = dayId === 5;
 
   return (
     <section className="driving-effort" aria-label="当天驾驶与体力负担" data-highest-burden={highestBurden || undefined}>
       <div className="driving-effort-heading">
         <span><CarFront size={14} aria-hidden="true" />驾驶与体力</span>
-        <small>按单人驾驶</small>
+        <small>4 人同行 · 轮换需授权</small>
       </div>
       <dl className="driving-effort-overview">
         <div><dt>操作减负</dt><dd><span className="driving-effort-system">AD Pro</span>{assessment.relief}</dd></div>
         <div><dt>全天负担</dt><dd className="driving-effort-burden">{assessment.burden}</dd></div>
       </dl>
       <p className="driving-effort-boundary">辅助驾驶须全程监督，不替代休息。</p>
-      <details className="driving-effort-details" key={`${dayId}-${overnight}`}>
+      <details className="driving-effort-details" key={dayId}>
         <summary>当天建议与车型依据<ChevronDown size={14} aria-hidden="true" /></summary>
         <div className="driving-effort-expanded">
           <p className="driving-effort-baseline">{dayId === 5 ? '外部自驾基线' : '当前驾驶基线'} · {durationText(minutes)}</p>
@@ -126,7 +101,7 @@ export function DrivingEffort({ dayId, overnight, minutes }: DrivingEffortProps)
             <div><dt>观察与接管</dt><dd>{assessment.supervision}</dd></div>
             <div><dt>休息安排</dt><dd>{assessment.rest}</dd></div>
           </dl>
-          <p className="driving-effort-assumption">以上为白天正常路况下的定性规划，未实测个人疲劳；休息间隔是行程建议，困倦时应提前停车。两人轮换仍需分别休息。</p>
+          <p className="driving-effort-assumption">以上为白天正常路况下的定性规划，未实测个人疲劳；休息间隔是行程建议，困倦时应提前停车。轮换仍需分别休息，驾驶人数变更后须核对租车授权。</p>
 
           <h3>这辆车能帮到哪里</h3>
           <p>此评估按 2024 L9 Pro 的 AD Pro 配置，不套用 AD Max 或 2025 智能焕新版的能力。</p>

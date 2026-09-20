@@ -6,7 +6,7 @@ export const foliage={
   grass:{kind:'grass',label:'草原秋草',image:'/leaf-grass-v1.webp',landscape:'呼伦贝尔的细草与草穗'},
   larch:{kind:'larch',label:'落叶松针',image:'/leaf-larch-v1.webp',landscape:'阿尔山的落叶松林'},
 } as const;
-const days:Record<number,keyof typeof foliage>={1:'poplar',2:'birch',3:'grass',4:'birch',5:'larch',6:'larch',7:'poplar'};
+const days:Record<number,keyof typeof foliage>={1:'poplar',2:'birch',3:'grass',4:'birch',5:'larch',6:'poplar',7:'poplar'};
 export const foliageForDay=(day:number)=>foliage[days[day]??'poplar'];
 export function foliageForContext(target:Element|null,day:number){
   const kind=target?.closest('[data-foliage]')?.getAttribute('data-foliage');
@@ -16,6 +16,6 @@ export function foliageForPlace(name:string,day:number){
   if(/额尔古纳/.test(name))return foliage.birch;
   if(/伊尔施|阿尔山|森林公园/.test(name))return foliage.larch;
   if(/海拉尔|满洲里|新巴尔虎|黑山头/.test(name))return foliage.grass;
-  if(/长春|龙嘉|松原|齐齐哈尔/.test(name))return foliage.poplar;
+  if(/长春|龙嘉|松原|齐齐哈尔|乌兰浩特/.test(name))return foliage.poplar;
   return foliageForDay(day);
 }

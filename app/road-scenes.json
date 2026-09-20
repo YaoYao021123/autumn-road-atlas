@@ -9,13 +9,27 @@
     "timing": "白天通过时观赏；无需为等光线增加停留。",
     "caution": "不是观景台或停车位。高速不停车拍照，休息只进开放的服务区或停车区，由乘客拍摄。",
     "sources": [
-      { "label": "牙克石市政府 · 市情简介", "url": "https://www.yks.gov.cn/OpennessContent/show/401591.html" },
-      { "label": "呼伦贝尔市政府 · 自然地理", "url": "https://www.hlbe.gov.cn/News/show/176355.html" }
+      {
+        "label": "牙克石市政府 · 市情简介",
+        "url": "https://www.yks.gov.cn/OpennessContent/show/401591.html"
+      },
+      {
+        "label": "呼伦贝尔市政府 · 自然地理",
+        "url": "https://www.hlbe.gov.cn/News/show/176355.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度路线 qiqihar_hailaer，steps[38] 轨迹代表点",
-    "legIds": ["qiqihar_hailaer"],
-    "bd09": [120.91915234402, 49.091645201809],
-    "position": [49.08414177671431, 120.9062351811628]
+    "legIds": [
+      "wanda_xana"
+    ],
+    "bd09": [
+      120.91915234402,
+      49.091645201809
+    ],
+    "position": [
+      49.08414177671431,
+      120.9062351811628
+    ]
   },
   {
     "id": "g332-grassland",
@@ -27,12 +41,23 @@
     "timing": "按当天行程上午经过，不为等侧光拖延南下。",
     "caution": "停车条件未核验，代表点不能导航停车。这里不代表莫日格勒河景区入口或河曲观景台。",
     "sources": [
-      { "label": "呼伦贝尔市政府 · 自然地理", "url": "https://www.hlbe.gov.cn/News/show/176355.html" }
+      {
+        "label": "呼伦贝尔市政府 · 自然地理",
+        "url": "https://www.hlbe.gov.cn/News/show/176355.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度路线 hailaer_erguna，steps[32] 轨迹代表点",
-    "legIds": ["hailaer_erguna"],
-    "bd09": [120.09696717685, 49.974072763861],
-    "position": [49.96622431701291, 120.08303519473166]
+    "legIds": [
+      "xana_wetland"
+    ],
+    "bd09": [
+      120.09696717685,
+      49.974072763861
+    ],
+    "position": [
+      49.96622431701291,
+      120.08303519473166
+    ]
   },
   {
     "id": "caidaihe-parking",
@@ -44,12 +69,23 @@
     "timing": "下午顺路休息约 15–20 分钟；若购票登高，另留约 45–60 分钟并核对运营。",
     "caution": "景区可不入园。停车开放、收费和登高方式以当天管理为准，不在入口道路或草场停车，不等待日落后再赶往满洲里。",
     "sources": [
-      { "label": "满洲里市政府 · 边境线与草原风光路线（仅采用地理与湿地描述）", "url": "https://www.manzhouli.gov.cn/News/show/872614.html" }
+      {
+        "label": "满洲里市政府 · 边境线与草原风光路线（仅采用地理与湿地描述）",
+        "url": "https://www.manzhouli.gov.cn/News/show/872614.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度停车入口 UID cc6339ec9c14f8899ef7794d；采用现有导航终点",
-    "legIds": ["heishantou_186_parking"],
-    "bd09": [119.04170155358, 49.96841610331],
-    "position": [49.960358, 119.027444]
+    "legIds": [
+      "heishantou_186_parking"
+    ],
+    "bd09": [
+      119.04170155358,
+      49.96841610331
+    ],
+    "position": [
+      49.960358,
+      119.027444
+    ]
   },
   {
     "id": "g331-banner-grassland",
@@ -61,13 +97,27 @@
     "timing": "上午至中午通过；根据补给和抵达进度安排休息。",
     "caution": "代表点不是停车位，两旗政府坐标也只用于锁定路线。注意横风与牲畜，勿驶入草场或在路肩外拍。",
     "sources": [
-      { "label": "呼伦贝尔市交通运输局 · G331 满洲里至阿木古郎通车报道", "url": "https://jtj.hlbe.gov.cn/News/show/1176929.html" },
-      { "label": "呼伦贝尔市政府 · 自然地理", "url": "https://www.hlbe.gov.cn/News/show/176355.html" }
+      {
+        "label": "呼伦贝尔市交通运输局 · G331 满洲里至阿木古郎通车报道",
+        "url": "https://jtj.hlbe.gov.cn/News/show/1176929.html"
+      },
+      {
+        "label": "呼伦贝尔市政府 · 自然地理",
+        "url": "https://www.hlbe.gov.cn/News/show/176355.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度路线 right_left_banner，steps[12] 轨迹代表点",
-    "legIds": ["right_left_banner"],
-    "bd09": [117.29172839976, 48.467493934781],
-    "position": [48.459916326644965, 117.27736263504258]
+    "legIds": [
+      "right_left_banner"
+    ],
+    "bd09": [
+      117.29172839976,
+      48.467493934781
+    ],
+    "position": [
+      48.459916326644965,
+      117.27736263504258
+    ]
   },
   {
     "id": "g331-iershi-forest",
@@ -79,13 +129,27 @@
     "timing": "下午、天黑前通过；进度较晚时缩短停靠。",
     "caution": "不是准确观景台，停车条件未核验。沿当前路线行驶，不加入未开放林道或边境支路。",
     "sources": [
-      { "label": "兴安盟政务门户 · 阿尔山概况", "url": "https://www.xam.gov.cn/eportal/ui?pageId=331989" },
-      { "label": "呼伦贝尔市政府 · 最美331线路（仅采用路线顺序）", "url": "https://www.hlbe.gov.cn/OpennessGazette/show/8450.html" }
+      {
+        "label": "兴安盟政务门户 · 阿尔山概况",
+        "url": "https://www.xam.gov.cn/eportal/ui?pageId=331989"
+      },
+      {
+        "label": "呼伦贝尔市政府 · 最美331线路（仅采用路线顺序）",
+        "url": "https://www.hlbe.gov.cn/OpennessGazette/show/8450.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度路线 left_banner_iershi，steps[30] 轨迹代表点",
-    "legIds": ["left_banner_iershi"],
-    "bd09": [119.56794545015, 47.42524598656],
-    "position": [47.4174786866663, 119.55437814576601]
+    "legIds": [
+      "left_linyuan"
+    ],
+    "bd09": [
+      119.56794545015,
+      47.42524598656
+    ],
+    "position": [
+      47.4174786866663,
+      119.55437814576601
+    ]
   },
   {
     "id": "park-approach-forest",
@@ -97,13 +161,27 @@
     "timing": "早晨前往游客中心时观赏；叶色与能见度以当天为准。",
     "caution": "沿途停车条件未核验，不在林区路肩或干草上停车。抵达已核验停车入口后按景区规定换乘。",
     "sources": [
-      { "label": "兴安盟政务门户 · 阿尔山概况", "url": "https://www.xam.gov.cn/eportal/ui?pageId=331989" },
-      { "label": "阿尔山市文旅局 · 两天玩转阿尔山（停车换乘规定）", "url": "https://www.aes.gov.cn/aes/2025-04/15/article_2025041515301061440.html" }
+      {
+        "label": "兴安盟政务门户 · 阿尔山概况",
+        "url": "https://www.xam.gov.cn/eportal/ui?pageId=331989"
+      },
+      {
+        "label": "阿尔山市文旅局 · 两天玩转阿尔山（停车换乘规定）",
+        "url": "https://www.aes.gov.cn/aes/2025-04/15/article_2025041515301061440.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度路线 iershi_park_parking，steps[12] 轨迹代表点",
-    "legIds": ["iershi_park_parking"],
-    "bd09": [120.08144302035, 47.371326822719],
-    "position": [47.363317028143825, 120.0679351102368]
+    "legIds": [
+      "linyuan_park"
+    ],
+    "bd09": [
+      120.08144302035,
+      47.371326822719
+    ],
+    "position": [
+      47.363317028143825,
+      120.0679351102368
+    ]
   },
   {
     "id": "park-visitor-transfer",
@@ -115,28 +193,50 @@
     "timing": "早晨抵达；换乘、排队和游览另计，按当天营业时间安排。",
     "caution": "入口已核验，不是免费观景点。2025 年市文旅局提示收费景点禁私家车、景区全线禁停车；临行复核当季开放与换乘规则。",
     "sources": [
-      { "label": "阿尔山市文旅局 · 两天玩转阿尔山", "url": "https://www.aes.gov.cn/aes/2025-04/15/article_2025041515301061440.html" }
+      {
+        "label": "阿尔山市文旅局 · 两天玩转阿尔山",
+        "url": "https://www.aes.gov.cn/aes/2025-04/15/article_2025041515301061440.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度停车入口 UID abb5947e1360f53b0869d948；采用现有导航终点",
-    "legIds": ["iershi_park_parking"],
-    "bd09": [120.3041931385, 47.281359520538],
-    "position": [47.273605, 120.291065]
+    "legIds": [
+      "linyuan_park"
+    ],
+    "bd09": [
+      120.3041931385,
+      47.281359520538
+    ],
+    "position": [
+      47.273605,
+      120.291065
+    ]
   },
   {
     "id": "g302-return-grassland",
-    "day": 6,
+    "day": 5,
     "title": "南返 G302 · 疏林草原",
     "road": "G302 阿尔山南返路段",
     "kind": "window",
-    "description": "从林地退出到疏林、草坡与宽阔谷地，作为旅程最后一段自然景观。地貌有报道依据，标记和短线仅示意当前返程路线。",
-    "timing": "07:00–07:30 出发后，上午在日间通过；返程日不额外加景区。",
+    "description": "从林地退出到疏林、草坡与谷地。这段现在属于 10/1 去乌兰浩特的路程，不是 10/2 长春返程；标记仅示意景观路段。",
+    "timing": "公园游览后南下时观赏；优先白天行车，进度晚时只做必要休息。",
     "caution": "不是停车位，停车条件未核验。报道中的黄羊属于冬季记录，不代表本次能看见；发现动物时减速避让。",
     "sources": [
-      { "label": "中国旅游报 · 与黄羊的新年约会（仅采用 G302 疏林草原地貌）", "url": "https://www.ctnews.com.cn/xczm/content/2024-01/23/content_155591.html" }
+      {
+        "label": "中国旅游报 · 与黄羊的新年约会（仅采用 G302 疏林草原地貌）",
+        "url": "https://www.ctnews.com.cn/xczm/content/2024-01/23/content_155591.html"
+      }
     ],
     "provenance": "定位：2026-09-09 百度路线 arxan_longjia，steps[27] 代表点；随所选返程轨迹匹配",
-    "legIds": ["arxan_longjia", "arxan_changchun_west", "arxan_songyuan"],
-    "bd09": [120.14528271837, 46.57669183601],
-    "position": [46.56855420508652, 120.13213565591154]
+    "legIds": [
+      "park_ji"
+    ],
+    "bd09": [
+      120.14528271837,
+      46.57669183601
+    ],
+    "position": [
+      46.56855420508652,
+      120.13213565591154
+    ]
   }
 ]

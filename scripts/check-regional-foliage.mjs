@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { foliage,foliageForDay,foliageForPlace } from '../app/regional-foliage.ts';
 assert.equal(Object.keys(foliage).length,4);
-assert.deepEqual([1,2,3,4,5,6,7].map(day=>foliageForDay(day).kind),['poplar','birch','grass','birch','larch','larch','poplar']);
+assert.deepEqual([1,2,3,4,5,6,7].map(day=>foliageForDay(day).kind),['poplar','birch','grass','birch','larch','poplar','poplar']);
 assert.equal(foliageForPlace('额尔古纳',3).kind,'birch');
 assert.equal(foliageForPlace('满洲里',3).kind,'grass');
 assert.equal(foliageForPlace('新巴尔虎左旗',4).kind,'grass');
