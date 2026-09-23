@@ -1,5 +1,5 @@
 export const stays = [
-  {id:'meilun',date:'09.26',city:'长春',name:'长春人民广场万象城美仑酒店',hotelId:103229085,amount:634,breakfast:'每间双早',address:'西安大路568号国际大厦C座十楼',note:'出发前一晚；次晨取车接驳待确认。'},
+  {id:'meilun',date:'09.26',city:'长春',name:'长春人民广场万象城美仑酒店',hotelId:103229085,amount:634,breakfast:'每间双早',address:'西安大路568号国际大厦C座十楼',note:'出发前一晚；9/27 车辆送到酒店，完成交接后出发。'},
   {id:'wanda',date:'09.27',city:'齐齐哈尔',name:'齐齐哈尔富力万达嘉华酒店',hotelId:19582367,amount:816,breakfast:'每间双早',address:'建华区新江路1号',note:'入住后吃烤肉，次晨从酒店北上。'},
   {id:'xana',date:'09.28',city:'海拉尔',name:'希岸酒店（呼伦贝尔海拉尔古城店）',hotelId:121877706,amount:898,breakfast:'每间双早',address:'中央大街3号',note:'晚饭、补给；次日早出发，早餐能否打包需问前台。'},
   {id:'vienna',date:'09.29',city:'满洲里',name:'维也纳智好酒店（满洲里中苏金街店）',hotelId:454570,amount:876,breakfast:'每间双早',address:'二道街中苏步行街116号',note:'中苏金街晚间散步；不是同楼的维也纳国际酒店。'},

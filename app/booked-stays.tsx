@@ -8,7 +8,7 @@ export function DailyStay({dayId}:{dayId:number}){
     <span className="stay-kicker"><Hotel size={14}/>酒店到酒店 · 4 人 / 2 间双床</span>
     <p><small>早上出发</small><a href={stayUrl(origin)} target="_blank" rel="noopener noreferrer">{origin.name}<ArrowUpRight size={12}/></a></p>
     {destination?<p><small>今晚入住 · {destination.breakfast}</small><a href={stayUrl(destination)} target="_blank" rel="noopener noreferrer">{destination.name}<ArrowUpRight size={12}/></a></p>:<p><small>当天终点</small><span>龙嘉机场还车 · 实际门店待确认</span></p>}
-    {dayId===1&&<small className="stay-warning">地图暂示市区取车后的酒店出发线；若需机场取车，接驳与路线须调整。</small>}
+    {dayId===1&&<small className="stay-warning">车辆送到美仑酒店；交接、检查车况和熟悉车辆的时间另留。</small>}
     {dayId===5&&<small className="stay-warning">今晚不回阿尔山。退房后带齐行李；公园换乘游览不计入地图驾驶时长。</small>}
   </section>;
 }
